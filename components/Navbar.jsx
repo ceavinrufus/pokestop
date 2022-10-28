@@ -1,9 +1,9 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({ title }) => {
   return (
-    <div className="bg-[#EF5350] h-[40px] flex items-center px-8">
-      <h1 className="text-xl text-[#fff]">PokéDeck</h1>
+    <div className={`h-[150px] flex items-center justify-center px-8`}>
+      <h1 className="text-5xl text-[#fff]">{title}</h1>
     </div>
   );
 };

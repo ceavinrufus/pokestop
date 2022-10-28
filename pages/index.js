@@ -4,32 +4,14 @@ import Navbar from "../components/Navbar";
 import Card from "../components/PokemonCard";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  const [pokemons, setPokemons] = useState([]);
-  const [load, setLoad] = useState(
-    "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=40"
-  );
+  const router = useRouter();
 
   useEffect(() => {
-    axios
-      .get(load)
-      .then((res) => {
-        const getPokemons = async () => {
-          try {
-            const fetchPokemonPromises = await res.data.results.map((pokemon) =>
-              axios.get(pokemon.url)
-            );
-            Promise.all(fetchPokemonPromises).then((values) => {
-              setPokemons([...pokemons, ...values.map((value) => value.data)]);
-            });
-          } catch (err) {
-            console.log(err);
-          }
-        };
-        getPokemons();
-      })
-      .catch((err) => console.log(err));
+    router.push("/pokemon");
   }, []);
 
   return (
@@ -40,17 +22,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div>
-      <main>
-        <Navbar />
-        <div className="my-12 mx-16 flex justify-center">
-          <div className=" flex flex-wrap gap-12 justify-center max-w-[2000px]">
-            {pokemons.map((pokemon, id) => (
-              <Card key={id} pokemon={pokemon} />
-            ))}
-          </div>
-        </div>
-      </main>
+      {/* <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div> */}
+      <div className="bg-[#323232] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div>
+
+      <main></main>
 
       <footer></footer>
     </div>
