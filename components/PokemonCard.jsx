@@ -39,24 +39,12 @@ function capitalize(str) {
 }
 
 const Card = ({ pokemon }) => {
-  const [theme, setTheme] = useState("color");
+  const [theme, setTheme] = useState("");
   const color = pokemon.types[0].type.name;
   return (
-    <div
-      style={{
-        background: `${
-          theme == "color" &&
-          `linear-gradient(45deg, ${types[color][1]}, ${types[color][2]})`
-        }`,
-      }}
-      className="shadow-2xl rounded-3xl gap-4 p-2"
-    >
-      <div className="flex items-center rounded-3xl transition bg-[#323232] hover:bg-transparent justify-between p-8 h-[250px] w-[300px]">
-        <div
-          className={`text-xl text-white hover:${
-            theme == "color" ? hexToGrayscale(types[color][1]) : "text-black"
-          }`}
-        >
+    <div className="shadow-2xl rounded-3xl gap-4">
+      <div className="flex items-center rounded-3xl bg-[#323232] text-white border border-white transition hover:text-[#323232] hover:bg-white justify-between p-8 h-[250px] w-[300px]">
+        <div className={`text-xl`}>
           {/* Nomor Pokemon */}
           <p>#{("000" + pokemon.id).slice(-3)}</p>
           {/* Nama Pokemon */}
@@ -78,10 +66,10 @@ const Card = ({ pokemon }) => {
         </div>
         <div className="">
           <div
-            // style={{
-            //   background: `linear-gradient(45deg, ${types[color][1]}, ${types[color][0]})`,
-            // }}
-            className="bg-[#fff] rounded-full h-[100px] w-[100px] pb-20"
+            style={{
+              background: `linear-gradient(45deg, ${types[color][1]}, ${types[color][0]})`,
+            }}
+            className="rounded-full h-[100px] w-[100px] pb-20"
           >
             <Image
               src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(

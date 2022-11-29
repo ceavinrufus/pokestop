@@ -90,12 +90,14 @@ export default function PokemonDetails() {
       {/* <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div> */}
       <div
         style={{
-          background: `${
-            pokemon.types &&
-            `linear-gradient(45deg, ${types[pokemon.types[0].type.name][1]}, ${
-              types[pokemon.types[0].type.name][0]
-            })`
-          }`,
+          // background: `${
+          //   pokemon.types &&
+          //   `linear-gradient(45deg, ${types[pokemon.types[0].type.name][1]}, ${
+          //     types[pokemon.types[0].type.name][0]
+          //   })`
+          // }`,
+          backgroundColor:
+            pokemon.types && types[pokemon.types[0].type.name][1],
         }}
         className="bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"
       ></div>
