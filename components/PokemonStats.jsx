@@ -113,9 +113,10 @@ function PokemonStats({ pokemon, details, description }) {
             <div className="flex">
               <div className="flex items-end">
                 <div
-                  className={`flex flex-col text-${hexToGrayscale(
-                    types[pokemon.types[0].type.name][1]
-                  )} justify-center w-[690px] h-full items-center rounded-full pb-12`}
+                  className={`flex flex-col text-${
+                    pokemon.types &&
+                    hexToGrayscale(types[pokemon.types[0].type.name][1])
+                  } justify-center w-[690px] h-full items-center rounded-full pb-12`}
                 >
                   <h2 className="text-xl ml-52 mb-12">
                     {description[0] &&
