@@ -8,9 +8,6 @@ import Link from "next/link";
 import DropdownMenu from "../../components/Sidebar";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-// export const getStaticProps = async () => {
-//   const res
-// }
 export default function Home() {
   const [pokemons, setPokemons] = useState([]);
   const [offset, setOffset] = useState(0);

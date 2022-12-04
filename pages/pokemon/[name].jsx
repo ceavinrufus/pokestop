@@ -6,42 +6,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
-const types = {
-  normal: ["#EAEADE", "#ACA974", "#ACA974"],
-  fire: ["#F8B80E", "#9b5510", "#F67F0B"],
-  water: ["#6390F0", "#08517A", "#6898F7"],
-  electric: ["#FFFA24", "#969101", "#FFFA24"],
-  grass: ["#7AC74C", "#204000", "#7AC74C"],
-  ice: ["#96D9D6", "#1995A1", "#96D9D6"],
-  fighting: ["#C22E28", "#800B11", "#C22E28"],
-  poison: ["#A33EA1", "#611380", "#A33EA1"],
-  ground: ["#EDE293", "#BFAC21", "#BFAC21"],
-  flying: ["#A98FF3", "#085764", "#A98FF3"],
-  psychic: ["#F95587", "#8A0532", "#F95587"],
-  bug: ["#D9FE9E", "#A6B91A", "#D9FE9E"],
-  rock: ["#B6A136", "#470426", "#B6A136"],
-  ghost: ["#735797", "#472B53", "#735797"],
-  dragon: ["#6F35FC", "#29036A", "#6F35FC"],
-  dark: ["#705746", "#2D221C", "#705746"],
-  steel: ["#B7B7CE", "#454545", "#B7B7CE"],
-  fairy: ["#FDD1E0", "#D685AD", "#FDD1E0"],
-};
+import PokemonStats from "../../components/PokemonStats";
+import { types, hexToGrayscale } from "../../functions/color";
 
 function capitalize(str) {
   return str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
-}
-
-function hexToGrayscale(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? 0.2126 * parseInt(result[1], 16) +
-        0.7152 * parseInt(result[2], 16) +
-        0.0722 * parseInt(result[3], 16) >=
-      128
-      ? "text-black"
-      : "text-white"
-    : null;
 }
 
 function meterToFeet(meter) {
@@ -90,7 +59,7 @@ export default function PokemonDetails() {
       </Head>
       <DropdownMenu open={open} setOpen={setOpen} />
 
-      {/* <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div> */}
+      <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div>
       <div
         style={{
           // background: `${
@@ -111,7 +80,7 @@ export default function PokemonDetails() {
             <a
               className={
                 pokemon.types &&
-                `text-5xl ${hexToGrayscale(
+                `text-5xl text-${hexToGrayscale(
                   types[pokemon.types[0].type.name][1]
                 )}`
               }
@@ -123,12 +92,10 @@ export default function PokemonDetails() {
         <section
           className={
             pokemon.types &&
-            `my-12 mx-16 ${hexToGrayscale(
-              types[pokemon.types[0].type.name][1]
-            )}`
+            `my-12 text-${hexToGrayscale(types[pokemon.types[0].type.name][1])}`
           }
         >
-          <div className="">
+          <div className="mx-16">
             <div className="flex items-center">
               {/* Nama Pokemon */}
               <h1 className="text-8xl">
@@ -161,22 +128,12 @@ export default function PokemonDetails() {
                 ))}
             </div>
           </div>
-
-          <div className="flex justify-center w-full rounded-full pb-20">
-            <h1 className="-mt-32 absolute text-[500px] text-opacity-10 text-white">
-              #{("000" + pokemon.id).slice(-3)}
-            </h1>
-            <Image
-              src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
-                "000" + pokemon.id
-              ).slice(-3)}.png`}
-              height={500}
-              width={500}
-              alt={pokemon.name}
-            />
+          <div className="h-full">
+            <PokemonStats pokemon={pokemon} />
           </div>
         </section>
 
+        {/* Info */}
         <section className="p-16 bg-[#fff] shadow-2xl  rounded-t-[50px]">
           <h2 className="text-xl">
             {details.flavor_text_entries &&

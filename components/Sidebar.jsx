@@ -11,7 +11,6 @@ import Image from "next/image";
 
 export default function Sidebar({ open, setOpen }) {
   const [activeMenu, setActiveMenu] = useState("main");
-  const [anjay, setAnjay] = useState(false);
   const router = useRouter();
 
   function DropdownItem(props) {
@@ -128,7 +127,7 @@ export default function Sidebar({ open, setOpen }) {
                 </>
               }
             >
-              <div onBlur={() => setAnjay(true)}>Item</div>
+              <div>Item</div>
             </DropdownItem>
           </div>
         </CSSTransition>
