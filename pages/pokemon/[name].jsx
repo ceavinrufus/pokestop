@@ -24,6 +24,7 @@ export default function PokemonDetails() {
   const [open, setOpen] = useState(false);
   const [pokemon, setPokemon] = useState([]);
   const [details, setDetails] = useState([]);
+  const [description, setDescription] = useState([]);
   const { name } = router.query;
 
   useEffect(() => {
@@ -37,6 +38,11 @@ export default function PokemonDetails() {
               axios.get(res.data.species.url).then((res) => {
                 const getDetails = async () => {
                   setDetails(res.data);
+                  setDescription(
+                    res.data.flavor_text_entries.filter(function (el) {
+                      return el.language?.name == "en";
+                    })
+                  );
                 };
                 getDetails();
               });
@@ -49,7 +55,6 @@ export default function PokemonDetails() {
         .catch((err) => console.log(err));
     }
   }, [router.isReady]);
-
   return (
     <div>
       <Head>
@@ -59,7 +64,7 @@ export default function PokemonDetails() {
       </Head>
       <DropdownMenu open={open} setOpen={setOpen} />
 
-      <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div>
+      {/* <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div> */}
       <div
         style={{
           // background: `${
@@ -136,8 +141,7 @@ export default function PokemonDetails() {
         {/* Info */}
         <section className="p-16 bg-[#fff] shadow-2xl  rounded-t-[50px]">
           <h2 className="text-xl">
-            {details.flavor_text_entries &&
-              details.flavor_text_entries[0].flavor_text.replace("\f", "\n")}
+            {description[0] && description[0].flavor_text.replace("\f", "\n")}
           </h2>
           {/* <table>
             <tbody>
@@ -165,21 +169,6 @@ export default function PokemonDetails() {
             </tbody>
           </table> */}
           {/* Base Stats */}
-          {/* <div className="rounded-3xl p-4">
-            <h2 className="text-5xl">Base Stats</h2>
-            <table>
-              <tbody>
-                {pokemon.stats && pokemon.stats[0].stat.name}
-                {pokemon.stats &&
-                  pokemon.stats.map((stat) => (
-                    <tr key={stat.stat.name}>
-                      <th>{stat.stat.name}</th>
-                      <td>{stat.base_stat}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div> */}
         </section>
       </main>
 
