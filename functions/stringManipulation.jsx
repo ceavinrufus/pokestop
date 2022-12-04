@@ -11,3 +11,10 @@ export function capitalizeEachFirstLetter(str, splitter) {
 
   return str2;
 }
+
+export function meterToFeet(meter) {
+  let m1 = meter * 3.2808;
+  let s1 = Math.floor(m1);
+  let s2 = Math.round(12 * (m1 - s1), 2);
+  return s1 + "'" + s2 + '"';
+}

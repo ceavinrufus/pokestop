@@ -8,17 +8,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import PokemonStats from "../../components/PokemonStats";
 import { types, hexToGrayscale } from "../../functions/color";
+import { capitalize, meterToFeet } from "../../functions/stringManipulation";
 
-function capitalize(str) {
-  return str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
-}
-
-function meterToFeet(meter) {
-  let m1 = meter * 3.2808;
-  let s1 = Math.floor(m1);
-  let s2 = Math.round(12 * (m1 - s1), 2);
-  return s1 + "'" + s2 + '"';
-}
 export default function PokemonDetails() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -80,96 +71,37 @@ export default function PokemonDetails() {
       ></div>
 
       <main>
-        <div className={`h-[150px] flex items-center justify-start mx-16`}>
+        <div className={`h-[150px] flex items-center  justify-start mx-16`}>
           <Link href="/">
             <a
               className={
                 pokemon.types &&
-                `text-5xl text-${hexToGrayscale(
+                `text-3xl w-full text-${hexToGrayscale(
                   types[pokemon.types[0].type.name][1]
                 )}`
               }
             >
-              PokéStop
+              <h1 className="text-center w-full">PokéStop</h1>
             </a>
           </Link>
         </div>
         <section
           className={
             pokemon.types &&
-            `my-12 text-${hexToGrayscale(types[pokemon.types[0].type.name][1])}`
+            `text-${hexToGrayscale(types[pokemon.types[0].type.name][1])}`
           }
         >
-          <div className="mx-16">
-            <div className="flex items-center">
-              {/* Nama Pokemon */}
-              <h1 className="text-8xl">
-                {pokemon && capitalize(pokemon.name)}
-              </h1>
-              {/* Icon */}
-              <Image
-                src={`https://www.cpokemon.com/pokes/shuffle/${pokemon.id}.png`}
-                height={100}
-                width={100}
-                alt={pokemon.name}
-              />
-            </div>
-            {/* Tipe Pokemon */}
-            <div className="flex gap-2">
-              {pokemon.types &&
-                pokemon.types.map((type) => (
-                  <div
-                    key={type.type.name}
-                    className="flex flex-col items-center m-2"
-                  >
-                    <Image
-                      src={`https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Types/POKEMON_TYPE_${type.type.name.toUpperCase()}.png`}
-                      height={50}
-                      width={50}
-                      alt={type.type.name}
-                    />
-                    <h3 className="text-2xl">{capitalize(type.type.name)}</h3>
-                  </div>
-                ))}
-            </div>
-          </div>
-          <div className="h-full">
-            <PokemonStats pokemon={pokemon} />
+          <div className="h-full mt-8">
+            <PokemonStats
+              pokemon={pokemon}
+              details={details}
+              description={description}
+            />
           </div>
         </section>
 
         {/* Info */}
-        <section className="p-16 bg-[#fff] shadow-2xl  rounded-t-[50px]">
-          <h2 className="text-xl">
-            {description[0] && description[0].flavor_text.replace("\f", "\n")}
-          </h2>
-          {/* <table>
-            <tbody>
-              <tr>
-                <th>Weight</th>
-                <td>
-                  {pokemon.weight / 10} kg (
-                  {((pokemon.weight / 10) * 2.2046).toFixed(1)} lbs)
-                </td>
-              </tr>
-              <tr>
-                <th>Height</th>
-                <td>
-                  {pokemon.height / 10} m ({meterToFeet(pokemon.height / 10)})
-                </td>
-              </tr>
-              <tr>
-                <th>Shape</th>
-                <td>{capitalize(details.shape.name)}</td>
-              </tr>
-              <tr>
-                <th>Color</th>
-                <td>{capitalize(details.color.name)}</td>
-              </tr>
-            </tbody>
-          </table> */}
-          {/* Base Stats */}
-        </section>
+        <section className="p-16 mt-8 bg-[#fff] shadow-2xl  rounded-t-[50px]"></section>
       </main>
 
       <footer></footer>

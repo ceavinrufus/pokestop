@@ -115,89 +115,83 @@ function RadarChart({ pokemon, level, iv, ev }) {
   };
 
   return (
-    <div
-      className={`w-1/3 h-full py-8 rounded-xl text-gray-700 bg-white text-${
-        pokemon.types && hexToGrayscale(types[pokemon.types[0].type.name][1])
-      } pl-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
-    >
-      <Radar
-        data={data}
-        options={{
-          scale: {
+    <Radar
+      data={data}
+      options={{
+        scale: {
+          ticks: {
+            beginAtZero: true,
+            min: 0,
+            userCallback: function (label, index, labels) {
+              // when the floored value is the same as the value we have a whole number
+              if (Math.floor(label) === label) {
+                return label;
+              }
+            },
+          },
+        },
+        responsive: true,
+        maintainAspectRatio: false,
+        scale: {
+          ticks: {
+            beginAtZero: true,
+            max: 5,
+          },
+        },
+        scales: {
+          r: {
+            grid: {
+              //   circular: true,
+              lineWidth: 0.5,
+              color: "rgb(55, 65, 81, 0.8)",
+              // color:
+              //   pokemon.types &&
+              //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
+            },
+            angleLines: {
+              lineWidth: 1.5,
+              color: "rgb(55, 65, 81, 0.8)",
+              // color:
+              //   pokemon.types &&
+              //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
+            },
+            pointLabels: {
+              //   backdropColor: "black",
+              color: "rgb(55, 65, 81, 0.8)",
+              // color:
+              //   pokemon.types &&
+              //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
+              font: {
+                size: 14,
+              },
+            },
             ticks: {
-              beginAtZero: true,
-              min: 0,
-              userCallback: function (label, index, labels) {
-                // when the floored value is the same as the value we have a whole number
-                if (Math.floor(label) === label) {
-                  return label;
-                }
+              // display: false,
+              borderColor: "black",
+              backdropColor:
+                pokemon.types && types[pokemon.types[0].type.name][0],
+              // color: "black",
+              color:
+                pokemon.types &&
+                hexToGrayscale(types[pokemon.types[0].type.name][0]),
+              font: {
+                size: 14,
               },
+              // maxTicksLimit: 7,
             },
+            suggestedMin: 0,
+            suggestedMax: Math.max(...maxStatsAt),
+            min: 0,
+            max: Math.max(...maxStatsAt),
           },
-          responsive: true,
-          maintainAspectRatio: false,
-          scale: {
-            ticks: {
-              beginAtZero: true,
-              max: 5,
-            },
+        },
+        plugins: {
+          legend: {
+            display: false,
           },
-          scales: {
-            r: {
-              grid: {
-                //   circular: true,
-                lineWidth: 0.5,
-                color: "rgb(55, 65, 81, 0.8)",
-                // color:
-                //   pokemon.types &&
-                //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
-              },
-              angleLines: {
-                lineWidth: 1.5,
-                color: "rgb(55, 65, 81, 0.8)",
-                // color:
-                //   pokemon.types &&
-                //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
-              },
-              pointLabels: {
-                //   backdropColor: "black",
-                color: "rgb(55, 65, 81, 0.8)",
-                // color:
-                //   pokemon.types &&
-                //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
-                font: {
-                  size: 14,
-                },
-              },
-              ticks: {
-                // display: false,
-                borderColor: "black",
-                backdropColor:
-                  pokemon.types && types[pokemon.types[0].type.name][0],
-                // color: "black",
-                color:
-                  pokemon.types &&
-                  hexToGrayscale(types[pokemon.types[0].type.name][0]),
-                font: {
-                  size: 14,
-                },
-                // maxTicksLimit: 7,
-              },
-              suggestedMin: 0,
-              suggestedMax: Math.max(...maxStatsAt),
-              min: 0,
-              max: Math.max(...maxStatsAt),
-            },
-          },
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-        }}
-      ></Radar>
-    </div>
+        },
+      }}
+    ></Radar>
   );
 }
 
