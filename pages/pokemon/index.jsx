@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import DropdownMenu from "../../components/Sidebar";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // export const getStaticProps = async () => {
 //   const res
@@ -64,7 +65,10 @@ export default function Home() {
         <Navbar title={"Pokémon"} />
 
         <div className={`my-12 mx-16 flex justify-center`}>
-          <div
+          <InfiniteScroll
+            dataLength={pokemons.length}
+            next={() => setOffset(offset + limit)}
+            hasMore={true}
             className={`flex flex-wrap gap-12 justify-center max-w-[2000px]`}
           >
             {pokemons.map((pokemon) => (
@@ -74,7 +78,7 @@ export default function Home() {
                 </a>
               </Link>
             ))}
-          </div>
+          </InfiniteScroll>
         </div>
       </main>
 
