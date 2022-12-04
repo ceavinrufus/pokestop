@@ -54,14 +54,14 @@ export default function Sidebar({ open, setOpen }) {
           unmountOnExit
         >
           <div className="w-full">
-            <DropdownItem
+            {/* <DropdownItem
               onClick={() => {
                 router.push("/profile");
               }}
               leftIcon={<CgProfile className="text-2xl" />}
             >
               My Profile
-            </DropdownItem>
+            </DropdownItem> */}
 
             <DropdownItem
               leftIcon={<TiDevicePhone className="text-2xl" />}
@@ -70,13 +70,13 @@ export default function Sidebar({ open, setOpen }) {
             >
               Pokédex
             </DropdownItem>
-            <DropdownItem
+            {/* <DropdownItem
               leftIcon={<MdOutlineBackpack className="text-2xl" />}
               rightIcon={<BsChevronRight />}
               onClick={() => setActiveMenu("backpack")}
             >
               Backpack
-            </DropdownItem>
+            </DropdownItem> */}
           </div>
         </CSSTransition>
 
