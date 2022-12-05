@@ -40,14 +40,14 @@ function PokemonMainInfo({ pokemon, details }) {
                     <p className="opacity-50" key={ability.slot}>
                       {`${ability.slot}. ${capitalizeEachFirstLetter(
                         ability.ability.name,
-                        " "
+                        "-"
                       )} (Hidden)`}
                     </p>
                   ) : (
                     <p key={ability.slot}>
                       {`${ability.slot}. ${capitalizeEachFirstLetter(
                         ability.ability.name,
-                        " "
+                        "-"
                       )}`}
                     </p>
                   )

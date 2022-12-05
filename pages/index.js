@@ -10,9 +10,9 @@ import { useRouter } from "next/router";
 export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
-    router.push("/pokemon");
-  }, []);
+  // useEffect(() => {
+  //   router.push("/pokemon");
+  // }, []);
 
   return (
     <div>

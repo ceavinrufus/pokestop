@@ -1,10 +1,10 @@
 import Head from "next/head";
-import Navbar from "../../components/Navbar";
-import Card from "../../components/ItemCard";
+import Navbar from "../../../components/Navbar";
+import Card from "../../../components/ItemCard";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import DropdownMenu from "../../components/Sidebar";
+import DropdownMenu from "../../../components/Sidebar";
 
 // export const getStaticProps = async () => {
 //   const res

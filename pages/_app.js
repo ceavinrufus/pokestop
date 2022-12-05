@@ -1,7 +1,33 @@
-import '../styles/globals.css'
+import { useState, useEffect } from "react";
+import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function SafeHydrate({ children }) {
+  return (
+    <div suppressHydrationWarning>
+      {typeof window === "undefined" ? null : children}
+    </div>
+  );
 }
 
-export default MyApp
+function MyApp({ Component, pageProps }) {
+  const [showing, setShowing] = useState(false);
+
+  useEffect(() => {
+    setShowing(true);
+  }, []);
+
+  if (!showing) {
+    return null;
+  }
+  if (typeof window === "undefined") {
+    return <></>;
+  } else {
+    return (
+      <SafeHydrate>
+        <Component {...pageProps} />
+      </SafeHydrate>
+    );
+  }
+}
+
+export default MyApp;

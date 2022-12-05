@@ -95,7 +95,7 @@ export default function Sidebar({ open, setOpen }) {
             </DropdownItem>
             <DropdownItem
               onClick={() => {
-                router.push("/pokemon");
+                router.push("/pokedex/pokemon");
               }}
               leftIcon={
                 <>
@@ -113,7 +113,7 @@ export default function Sidebar({ open, setOpen }) {
             </DropdownItem>
             <DropdownItem
               onClick={() => {
-                router.push("/item");
+                router.push("/pokedex/item");
               }}
               leftIcon={
                 <>

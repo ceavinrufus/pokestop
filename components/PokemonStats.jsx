@@ -80,6 +80,7 @@ function PokemonStats({ pokemon, details, description }) {
                 >
                   {pokemon.id && `#${("000" + pokemon.id).slice(-3)}`}
                 </h1>
+                {/* Pokemon Image */}
                 <Image
                   src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
                     "000" + pokemon.id

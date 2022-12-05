@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
-import Navbar from "../../components/Navbar";
-import Card from "../../components/PokemonCard";
+import Navbar from "../../../components/Navbar";
+import Card from "../../../components/PokemonCard";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import DropdownMenu from "../../components/Sidebar";
+import DropdownMenu from "../../../components/Sidebar";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Home() {
@@ -69,7 +69,7 @@ export default function Home() {
             className={`flex flex-wrap gap-12 justify-center max-w-[2000px]`}
           >
             {pokemons.map((pokemon) => (
-              <Link key={pokemon.id} href={`/pokemon/${pokemon.name}`}>
+              <Link key={pokemon.id} href={`/pokedex/pokemon/${pokemon.name}`}>
                 <a href="">
                   <Card pokemon={pokemon} />
                 </a>

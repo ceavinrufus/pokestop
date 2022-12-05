@@ -1,14 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
-import Navbar from "../../components/Navbar";
-import DropdownMenu from "../../components/Sidebar";
+import DropdownMenu from "../../../components/Sidebar";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import PokemonStats from "../../components/PokemonStats";
-import { types, hexToGrayscale } from "../../functions/color";
-import { capitalize, meterToFeet } from "../../functions/stringManipulation";
+import PokemonStats from "../../../components/PokemonStats";
+import { types, hexToGrayscale } from "../../../functions/color";
 
 export default function PokemonDetails() {
   const router = useRouter();
