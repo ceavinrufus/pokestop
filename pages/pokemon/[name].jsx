@@ -81,7 +81,7 @@ export default function PokemonDetails() {
                 )}`
               }
             >
-              <h1 className="text-center w-full">PokéStop</h1>
+              <h1 className="text-center text-5xl w-full">PokéStop</h1>
             </a>
           </Link>
         </div>

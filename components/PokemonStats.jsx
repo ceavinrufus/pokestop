@@ -8,11 +8,9 @@ import "swiper/css/pagination";
 import RadarChart from "./RadarChart";
 import { types, hexToGrayscale } from "../functions/color";
 import Dropdown from "./Dropdown";
-import {
-  capitalize,
-  capitalizeEachFirstLetter,
-  meterToFeet,
-} from "../functions/stringManipulation";
+import { capitalizeEachFirstLetter } from "../functions/stringManipulation";
+import NamaPokemon from "./NamaPokemon";
+import PokemonMainInfo from "./PokemonMainInfo";
 
 function PokemonStats({ pokemon, details, description }) {
   const router = useRouter();
@@ -34,22 +32,10 @@ function PokemonStats({ pokemon, details, description }) {
         className="mySwiper"
       >
         <SwiperSlide>
-          <div className="mx-16">
+          <div className="mx-24">
             <div className="flex justify-between">
               <div className="">
-                <div className="flex items-center">
-                  {/* Nama Pokemon */}
-                  <h1 className="text-6xl">
-                    {pokemon.name && capitalize(pokemon.name)}
-                  </h1>
-                  {/* Icon */}
-                  <Image
-                    src={`https://www.cpokemon.com/pokes/shuffle/${pokemon.id}.png`}
-                    height={75}
-                    width={75}
-                    alt={pokemon.name}
-                  />
-                </div>
+                <NamaPokemon pokemon={pokemon} />
                 {/* Tipe Pokemon */}
                 <div className="flex gap-2">
                   {pokemon.types &&
@@ -65,31 +51,29 @@ function PokemonStats({ pokemon, details, description }) {
                           alt={type.type.name}
                         />
                         <h3 className="text-xl">
-                          {capitalize(type.type.name)}
+                          {capitalizeEachFirstLetter(type.type.name, " ")}
                         </h3>
                       </div>
                     ))}
                 </div>
               </div>
-              <div className="">
-                <h1
-                  style={{
-                    writingMode: "vertical-rl",
-                    textOrientation: "upright",
-                  }}
-                  className="text-8xl text-left"
-                >
-                  {
-                    details.names?.find((name) => name.language?.name == "ja")
-                      .name
-                  }
-                </h1>
-              </div>
+              <h1
+                style={{
+                  writingMode: "vertical-rl",
+                  textOrientation: "upright",
+                }}
+                className="text-8xl text-left min-h-[450px]"
+              >
+                {
+                  details.names?.find((name) => name.language?.name == "ja")
+                    .name
+                }
+              </h1>
             </div>
             <div className="flex">
-              <div className="flex -mt-64 justify-center w-full rounded-full pb-20">
+              <div className="flex -mt-80 justify-center w-full rounded-full pb-20">
                 <h1
-                  className={`-mt-24 absolute text-[400px] text-opacity-10 text-${
+                  className={`-mt-12 absolute text-[350px] text-opacity-10 text-${
                     pokemon.types &&
                     hexToGrayscale(types[pokemon.types[0].type.name][1])
                   }`}
@@ -100,8 +84,8 @@ function PokemonStats({ pokemon, details, description }) {
                   src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
                     "000" + pokemon.id
                   ).slice(-3)}.png`}
-                  height={400}
-                  width={400}
+                  height={450}
+                  width={450}
                   alt={pokemon.name}
                 />
               </div>
@@ -109,63 +93,20 @@ function PokemonStats({ pokemon, details, description }) {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="mx-2 grid grid-cols-2">
-            <div className="flex">
-              <div className="flex items-end">
-                <div
-                  className={`flex flex-col text-${
-                    pokemon.types &&
-                    hexToGrayscale(types[pokemon.types[0].type.name][1])
-                  } justify-center w-[690px] h-full items-center rounded-full pb-12`}
-                >
-                  <h2 className="text-xl ml-52 mb-12">
-                    {description[0] &&
-                      description[0].flavor_text.replace("\f", "\n")}
-                  </h2>
-                  <table>
-                    <tbody className="text-xl text-left divide-y-2 divide-gray-75">
-                      <tr>
-                        <th className="pl-2 font-thin pr-8">National No</th>
-                        <td className="pr-2">
-                          {pokemon.id && `#${("000" + pokemon.id).slice(-3)}`}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="pl-2 font-thin pr-10">Name</th>
-                        <td className="pr-2">
-                          {pokemon.id &&
-                            `${capitalizeEachFirstLetter(pokemon.name)}`}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="pl-2 font-thin pr-10">Weight</th>
-                        <td className="pr-2">
-                          {pokemon.weight / 10} kg (
-                          {((pokemon.weight / 10) * 2.2046).toFixed(1)} lbs)
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="pl-2 font-thin pr-10">Height</th>
-                        <td className="pr-2">
-                          {pokemon.height / 10} m (
-                          {meterToFeet(pokemon.height / 10)})
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="pl-2 font-thin pr-10">Shape</th>
-                        <td className="pr-2">
-                          {details.shape && capitalize(details.shape?.name)}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="pl-2 font-thin pr-10">Color</th>
-                        <td className="pr-2">
-                          {details.shape && capitalize(details.color?.name)}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+          <div className="mx-24 grid grid-cols-2">
+            <div
+              className={`flex flex-col text-${
+                pokemon.types &&
+                hexToGrayscale(types[pokemon.types[0].type.name][1])
+              }`}
+            >
+              <NamaPokemon pokemon={pokemon} />
+              <h2 className="text-xl my-8">
+                {description[0] &&
+                  description[0].flavor_text.replace("\f", "\n")}
+              </h2>
+              <div className={`flex justify-start`}>
+                <PokemonMainInfo pokemon={pokemon} details={details} />
               </div>
             </div>
             <div className="flex flex-col items-center w-full">
