@@ -17,7 +17,7 @@ function PokemonStats({ pokemon, details, description }) {
   const [level, setLevel] = useState();
   const [iv, setIV] = useState();
   const [ev, setEV] = useState();
-  console.log(details.names);
+
   return (
     <>
       <Swiper
@@ -73,7 +73,7 @@ function PokemonStats({ pokemon, details, description }) {
             <div className="flex">
               <div className="flex -mt-80 justify-center w-full rounded-full pb-20">
                 <h1
-                  className={`-mt-12 absolute text-[350px] text-opacity-10 text-${
+                  className={`-mt-12 absolute text-[350px] text-opacity-100 text-${
                     pokemon.types &&
                     hexToGrayscale(types[pokemon.types[0].type.name][1])
                   }`}

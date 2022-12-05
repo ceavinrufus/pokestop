@@ -10,6 +10,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Home() {
   const [pokemons, setPokemons] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(20);
   // const [open, setOpen] = useState(true);
@@ -26,6 +27,7 @@ export default function Home() {
             );
             Promise.all(fetchPokemonPromises).then((values) => {
               setPokemons([...pokemons, ...values.map((value) => value.data)]);
+              setLoading(false);
             });
           } catch (err) {
             console.log(err);
@@ -51,32 +53,38 @@ export default function Home() {
         <link rel="icon" href="/assets/logo.png" />
       </Head>
 
-      {/* <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div> */}
       <div
         // style={{ background: `linear-gradient(45deg, #F2F2F2, #f6f6f6)` }}
         className="bg-[#323232] fixed min-h-screen w-screen -z-50"
       ></div>
+      {/* <div className="bg-[url('../public/assets/container_bg.png')] bg-repeat fixed min-h-screen w-screen -z-50"></div> */}
+      <div className="bg-[url('../public/assets/body_bg.png')] bg-repeat fixed min-h-screen w-screen -z-50"></div>
 
       <DropdownMenu open={open} setOpen={setOpen} />
       <main>
         <Navbar title={"Pokémon"} />
 
-        <div className={`my-12 mx-16 flex justify-center`}>
-          <InfiniteScroll
-            dataLength={pokemons.length}
-            next={() => setOffset(offset + limit)}
-            hasMore={true}
-            className={`flex flex-wrap gap-12 justify-center max-w-[2000px]`}
-          >
-            {pokemons.map((pokemon) => (
-              <Link key={pokemon.id} href={`/pokedex/pokemon/${pokemon.name}`}>
-                <a href="">
-                  <Card pokemon={pokemon} />
-                </a>
-              </Link>
-            ))}
-          </InfiniteScroll>
-        </div>
+        {!loading && (
+          <div className={`my-12 mx-16 flex justify-center`}>
+            <InfiniteScroll
+              dataLength={pokemons.length}
+              next={() => setOffset(offset + limit)}
+              hasMore={true}
+              className={`flex flex-wrap gap-12 justify-center max-w-[2000px]`}
+            >
+              {pokemons.map((pokemon) => (
+                <Link
+                  key={pokemon.id}
+                  href={`/pokedex/pokemon/${pokemon.name}`}
+                >
+                  <a href="">
+                    <Card pokemon={pokemon} />
+                  </a>
+                </Link>
+              ))}
+            </InfiniteScroll>
+          </div>
+        )}
       </main>
 
       <footer></footer>

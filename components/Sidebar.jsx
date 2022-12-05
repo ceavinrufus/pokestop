@@ -16,7 +16,7 @@ export default function Sidebar({ open, setOpen }) {
   function DropdownItem(props) {
     return (
       <div
-        className="h-[45px] flex items-center group px-8 cursor-pointer bg-white hover:bg-opacity-20"
+        className="h-[45px] flex items-center group px-8 cursor-pointer hover:bg-[#E3350D] hover:text-white"
         onClick={props.onClick}
       >
         <span className="rounded-full flex items-center group justify-center mr-2 hover:filter-none transition-filter">
@@ -39,11 +39,11 @@ export default function Sidebar({ open, setOpen }) {
       ></div>
 
       <div
-        className={`transition duration-500 fixed min-h-screen w-[200px] border rounded-r-xl overflow-hidden transition-height bg-white shadow-2xl z-40 ${
+        className={`transition duration-500 fixed min-h-screen w-[200px] border rounded-r-xl overflow-hidden transition-height bg-white bg-[url('../public/assets/container_bg.png')] shadow-2xl z-40 ${
           open ? "" : "-translate-x-44"
         }`}
       >
-        <div className="bg-[#fff] h-[40px] flex items-center px-8 mb-10 mt-5">
+        <div className="h-[40px] flex items-center px-8 mb-10 mt-5">
           <h1 className="text-xl text-[#E3350D]">PokéStop</h1>
         </div>
         <CSSTransition
