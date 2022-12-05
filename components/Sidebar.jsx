@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { BsChevronRight } from "react-icons/bs";
 import { IoArrowBack } from "react-icons/io5";
-import { MdOutlineBackpack } from "react-icons/md";
+import { MdOutlineBackpack, MdExitToApp } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/router";
 import { TbPokeball } from "react-icons/tb";
@@ -44,7 +44,14 @@ export default function Sidebar({ open, setOpen }) {
         }`}
       >
         <div className="h-[40px] flex items-center px-8 mb-10 mt-5">
-          <h1 className="text-xl text-[#E3350D]">PokéStop</h1>
+          <button
+            onClick={() => {
+              router.push("/");
+            }}
+            className="text-xl text-[#E3350D]"
+          >
+            PokéStop
+          </button>
         </div>
         <CSSTransition
           in={activeMenu === "main"}
@@ -76,6 +83,14 @@ export default function Sidebar({ open, setOpen }) {
             >
               Backpack
             </DropdownItem> */}
+            <DropdownItem
+              onClick={() => {
+                router.push("/");
+              }}
+              leftIcon={<MdExitToApp className="text-2xl" />}
+            >
+              Exit
+            </DropdownItem>
           </div>
         </CSSTransition>
 

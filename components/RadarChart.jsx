@@ -9,7 +9,7 @@ import {
   RadialLinearScale,
   Tooltip,
 } from "chart.js/auto";
-import { types, hexToGrayscale } from "../functions/color";
+import { types, hexToGrayscale, hexToRgb } from "../functions/color";
 import {
   capitalize,
   capitalizeEachFirstLetter,
@@ -103,13 +103,17 @@ function RadarChart({ pokemon, level, iv, ev }) {
         data: dataUsed,
         borderWidth: 2,
         fill: true,
-        backgroundColor: "rgba(153, 216, 222, 0.4)",
-        borderColor: "#00AFBB",
+        backgroundColor: `rgb(${
+          hexToRgb(types[pokemon.types[0].type.name][0]).r
+        }, ${hexToRgb(types[pokemon.types[0].type.name][0]).g}, ${
+          hexToRgb(types[pokemon.types[0].type.name][0]).b
+        }, 0.5)`,
+        borderColor: types[pokemon.types[0].type.name][1],
         pointBorderWidth: 0.5,
-        pointBackgroundColor: "#00AFBB",
-        pointBorderColor: "#fff",
+        pointBackgroundColor: types[pokemon.types[0].type.name][0],
+        pointBorderColor: types[pokemon.types[0].type.name][1],
         pointHoverBackgroundColor: "#fff",
-        pointHoverBorderColor: "rgb(255, 99, 132)",
+        pointHoverBorderColor: types[pokemon.types[0].type.name][0],
       },
     ],
   };
@@ -169,11 +173,11 @@ function RadarChart({ pokemon, level, iv, ev }) {
               // display: false,
               borderColor: "black",
               backdropColor:
-                pokemon.types && types[pokemon.types[0].type.name][0],
+                pokemon.types && types[pokemon.types[0].type.name][1],
               // color: "black",
               color:
                 pokemon.types &&
-                hexToGrayscale(types[pokemon.types[0].type.name][0]),
+                hexToGrayscale(types[pokemon.types[0].type.name][1]),
               font: {
                 size: 14,
               },

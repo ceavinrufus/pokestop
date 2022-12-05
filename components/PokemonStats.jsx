@@ -124,10 +124,7 @@ function PokemonStats({ pokemon, details, description }) {
               <div className="flex justify-center w-full mb-16">
                 <div className="flex items-center justify-center">
                   <div className="flex justify-center items-center space-x-2 w-48">
-                    <label
-                      htmlFor=""
-                      className="text-gray-100 md:text-xl font-semibold ml-1"
-                    >
+                    <label htmlFor="" className="text-gray-100 md:text-xl ml-1">
                       Level
                     </label>
                     <input
@@ -145,10 +142,7 @@ function PokemonStats({ pokemon, details, description }) {
                     />
                   </div>
                   <div className="flex justify-center items-center space-x-2 w-48">
-                    <label
-                      htmlFor=""
-                      className="text-gray-100 md:text-xl font-semibold ml-1"
-                    >
+                    <label htmlFor="" className="text-gray-100 md:text-xl ml-1">
                       IV
                     </label>
                     <input
@@ -163,10 +157,7 @@ function PokemonStats({ pokemon, details, description }) {
                     />
                   </div>
                   <div className="flex justify-center items-center space-x-2 w-48">
-                    <label
-                      htmlFor=""
-                      className="text-gray-100 md:text-xl font-semibold ml-1"
-                    >
+                    <label htmlFor="" className="text-gray-100 md:text-xl ml-1">
                       EV
                     </label>
                     <input
@@ -183,7 +174,7 @@ function PokemonStats({ pokemon, details, description }) {
                   {/* <div className="flex justify-center items-center space-x-2">
                   <label
                     htmlFor=""
-                    className="text-gray-100 md:text-xl font-semibold ml-1"
+                    className="text-gray-100 md:text-xl ml-1"
                   >
                     Nature
                   </label>
