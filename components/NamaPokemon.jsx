@@ -16,7 +16,11 @@ function NamaPokemon({ pokemon }) {
         </h1>
         {/* Icon */}
         <Image
-          src={`https://www.cpokemon.com/pokes/shuffle/${pokemon.id}.png`}
+          src={
+            pokemon.id <= 999
+              ? `https://www.cpokemon.com/pokes/shuffle/${pokemon.id}.png`
+              : `/assets/pokeball.png`
+          }
           height={80}
           width={80}
           alt={pokemon.name}
