@@ -7,6 +7,7 @@ import axios from "axios";
 import Link from "next/link";
 import Sidebar from "../../../components/Sidebar";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Search from "../../../components/Search";
 
 export default function Home() {
   const [pokemons, setPokemons] = useState([]);
@@ -65,25 +66,27 @@ export default function Home() {
         <Navbar title={"Pokémon"} />
 
         {!loading && (
-          <div className={`mx-10 my-4 lg:my-12 lg:mx-16 flex justify-center`}>
-            <InfiniteScroll
-              dataLength={pokemons.length}
-              next={() => setOffset(offset + limit)}
-              hasMore={true}
-              className={`flex flex-wrap lg:gap-12 md:gap-8 gap-2 justify-center max-w-[2000px]`}
-            >
-              {pokemons.map((pokemon) => (
-                <Link
-                  key={pokemon.id}
-                  href={`/pokedex/pokemon/${pokemon.name}`}
-                >
-                  <a href="">
-                    <Card pokemon={pokemon} />
-                  </a>
-                </Link>
-              ))}
-            </InfiniteScroll>
-          </div>
+          <>
+            <div className={`lg:mx-28 my-4 flex justify-center min-w-screen`}>
+              <InfiniteScroll
+                dataLength={pokemons.length}
+                next={() => setOffset(offset + limit)}
+                hasMore={true}
+                className={`flex flex-wrap lg:gap-12 md:gap-8 gap-2 justify-center max-w-[2000px]`}
+              >
+                {pokemons.map((pokemon) => (
+                  <Link
+                    key={pokemon.id}
+                    href={`/pokedex/pokemon/${pokemon.name}`}
+                  >
+                    <a href="">
+                      <Card pokemon={pokemon} />
+                    </a>
+                  </Link>
+                ))}
+              </InfiniteScroll>
+            </div>
+          </>
         )}
       </main>
 

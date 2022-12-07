@@ -2,7 +2,6 @@ import Head from "next/head";
 import Sidebar from "../../../components/Sidebar";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import PokemonStats from "../../../components/PokemonStats";
 import { types, hexToGrayscale } from "../../../functions/color";
@@ -12,6 +11,7 @@ import {
 } from "../../../functions/stringManipulation";
 import NotFound from "../../../components/NotFound";
 import NamaPokemon from "../../../components/NamaPokemon";
+import Navbar from "../../../components/Navbar";
 
 export default function PokemonDetails() {
   const router = useRouter();
@@ -82,12 +82,6 @@ export default function PokemonDetails() {
               {/* <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div> */}
               <div
                 style={{
-                  // background: `${
-                  //   pokemon.types &&
-                  //   `linear-gradient(45deg, ${types[pokemon.types[0].type.name][1]}, ${
-                  //     types[pokemon.types[0].type.name][0]
-                  //   })`
-                  // }`,
                   backgroundColor:
                     pokemon.types && types[pokemon.types[0].type.name][1],
                 }}
@@ -96,24 +90,13 @@ export default function PokemonDetails() {
               {/* <div className="bg-[url('../public/assets/container_bg.png')] bg-opacity-0 bg-repeat fixed min-h-screen w-screen -z-50"></div> */}
 
               <main>
-                <div
-                  className={`h-[100px] md:h-[125px] lg:h-[150px] flex items-center justify-start mx-10 md:mx-16 lg:mx-24`}
-                >
-                  <Link href="/">
-                    <a
-                      className={
-                        pokemon.types &&
-                        `w-full text-${hexToGrayscale(
-                          types[pokemon.types[0].type.name][1]
-                        )}`
-                      }
-                    >
-                      <h1 className="text-left text-xl md:text-3xl lg:text-5xl w-full">
-                        PokéStop
-                      </h1>
-                    </a>
-                  </Link>
-                </div>
+                <Navbar
+                  title={"PokéStop"}
+                  textColor={hexToGrayscale(
+                    types[pokemon.types[0].type.name][1]
+                  )}
+                />
+
                 <section
                   className={
                     pokemon.types &&
@@ -133,7 +116,7 @@ export default function PokemonDetails() {
                 </section>
 
                 {/* Info */}
-                <section className="p-16 mt-8 bg-[#fff] shadow-2xl  rounded-t-[50px]"></section>
+                <section className="p-16 mt-8 bg-[#fff] shadow-2xl rounded-t-[50px]"></section>
               </main>
             </>
           ) : (

@@ -96,8 +96,8 @@ function RadarChart({ pokemon, smallDevice }) {
       "HP",
       "Attack",
       "Defense",
-      smallDevice ? "S. Attack" : "Special Attack",
-      smallDevice ? "S. Defense" : "Special Defense",
+      smallDevice ? "Sp. Attack" : "Special Attack",
+      smallDevice ? "Sp. Defense" : "Special Defense",
       "Speed",
     ],
     datasets: [
@@ -121,15 +121,34 @@ function RadarChart({ pokemon, smallDevice }) {
     ],
   };
 
+  function InputParam({ label, value }) {
+    return (
+      <div className="flex flex-col text-center items-center lg:items-center mx-10 md:mx-0 mb-2">
+        <label htmlFor="" className="text-gray-100 md:w-full lg:text-xl">
+          {label}
+        </label>
+        <input
+          type="text"
+          required
+          value={value}
+          placeholder={label}
+          className={`h-10 rounded-xl text-gray-700 w-5/6 lg:w-full lg:max-w-[200px] bg-white pl-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
+          onChange={(e) => {
+            setLevel(e.target.value);
+          }}
+        />
+      </div>
+    );
+  }
   return (
     <div
       className={`${
         smallDevice && "flex items-center flex-col"
-      } justify-center`}
+      } justify-center lg:flex`}
     >
-      <div className="flex justify-center md:w-full w-[300px] h-[300px] md:h-[400px] lg:h-[500px] items-center rounded-full pb-8">
+      <div className="flex justify-center w-full h-[300px] md:h-[400px] lg:h-[500px] lg:flex-grow items-center rounded-full pb-8">
         <div
-          className={`flex lg:w-4/5 md:w-fit h-full rounded-xl text-gray-700 bg-white text-${
+          className={`flex md:w-full h-full rounded-xl text-gray-700 bg-white text-${
             pokemon.types &&
             hexToGrayscale(types[pokemon.types[0].type.name][1])
           } py-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
@@ -200,59 +219,14 @@ function RadarChart({ pokemon, smallDevice }) {
                 },
               },
             }}
-          ></Radar>{" "}
+          ></Radar>
         </div>
       </div>
-      <div className="flex justify-center w-full mb-16">
-        <div className="w-full flex-wrap space-y-2 md:flex-nowrap flex items-center justify-center md:w-3/4">
-          <div className="flex justify-center items-center space-x-2 w-48">
-            <label htmlFor="" className="text-gray-100 lg:text-xl">
-              Level
-            </label>
-            <input
-              type="text"
-              required
-              value={level}
-              placeholder="Level"
-              className={`w-1/2 h-10 rounded-xl text-gray-700 bg-white text-${
-                pokemon.types &&
-                hexToGrayscale(types[pokemon.types[0].type.name][1])
-              }  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
-              onChange={(e) => {
-                setLevel(e.target.value);
-              }}
-            />
-          </div>
-          <div className="flex justify-center items-center space-x-2 w-48">
-            <label htmlFor="" className="text-gray-100 lg:text-xl">
-              IV
-            </label>
-            <input
-              type="text"
-              required
-              value={iv}
-              placeholder="IV"
-              className="w-1/2 h-10 rounded-xl text-gray-700 bg-white  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500"
-              onChange={(e) => {
-                setIV(e.target.value);
-              }}
-            />
-          </div>
-          <div className="flex justify-center items-center space-x-2 w-48">
-            <label htmlFor="" className="text-gray-100 lg:text-xl">
-              EV
-            </label>
-            <input
-              type="text"
-              required
-              value={ev}
-              placeholder="EV"
-              className="w-1/2 h-10 rounded-xl text-gray-700 bg-white  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500"
-              onChange={(e) => {
-                setEV(e.target.value);
-              }}
-            />
-          </div>
+      <div className="flex justify-center w-full mb-16 lg:w-1/3">
+        <div className="w-full flex-col md:flex-row lg:flex-col lg:ml-10 flex items-around justify-center">
+          <InputParam label={"Level"} value={level} />
+          <InputParam label={"Individual Value"} value={iv} />
+          <InputParam label={"Effort Value"} value={ev} />
         </div>
       </div>
     </div>

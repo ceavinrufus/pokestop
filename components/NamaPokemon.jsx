@@ -5,7 +5,7 @@ import { capitalizeEachFirstLetter } from "../functions/stringManipulation";
 function NamaPokemon({ pokemon }) {
   return (
     <>
-      <div className="mx-10 md:mx-16 lg:mx-24">
+      <div className="mx-10 md:mx-16 lg:mx-28">
         <div className="flex items-center gap-2">
           {/* Nama Pokemon */}
           <h1 className="text-3xl md:text-5xl lg:text-7xl">

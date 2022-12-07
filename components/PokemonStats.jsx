@@ -27,7 +27,7 @@ function PokemonStats({ pokemon, details, description }) {
           className="mySwiper"
         >
           <SwiperSlide>
-            <div className="mx-10 md:mx-16 lg:mx-24">
+            <div className="mx-10 md:mx-16 lg:mx-28">
               <div className="flex items-center justify-between">
                 <div className="">
                   {/* Tipe Pokemon */}
@@ -48,7 +48,7 @@ function PokemonStats({ pokemon, details, description }) {
                       ))}
                   </div>
                 </div>
-                <div className="text-base md:text-2xl lg:text-3xl pb-1">
+                <div className="text-sm md:text-2xl lg:text-3xl pb-1">
                   {details.is_mythical && (
                     <h1
                       style={{
@@ -122,7 +122,7 @@ function PokemonStats({ pokemon, details, description }) {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="md:mx-16 lg:mx-24 items-center flex gap-6 md:flex-row flex-col-reverse">
+            <div className="md:mx-16 lg:mx-28 items-center flex gap-6 md:flex-row flex-col-reverse">
               <div
                 className={`flex flex-col justify-center mx-12 md:mx-0 md:w-1/2 text-${
                   pokemon.types &&
@@ -163,7 +163,7 @@ function PokemonStats({ pokemon, details, description }) {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="md:mx-16 lg:mx-24 flex gap-6">
+            <div className="md:mx-16 lg:mx-28 flex gap-6">
               <div className="flex flex-col w-full">
                 <div className="md:flex flex-col mt-8 w-full hidden">
                   <RadarChart pokemon={pokemon} smallDevice={false} />
