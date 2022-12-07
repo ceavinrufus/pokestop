@@ -20,6 +20,26 @@ ChartJS.register(
   Filler
 );
 
+function InputParam({ label, value, set, placeholder }) {
+  return (
+    <div className="flex flex-col text-center items-center lg:items-center mx-10 md:mx-0 mb-2">
+      <label htmlFor="" className="text-gray-100 md:w-full lg:text-xl">
+        {label}
+      </label>
+      <input
+        type="text"
+        required
+        value={value}
+        placeholder={placeholder}
+        className={`h-10 rounded-xl text-gray-700 w-5/6 lg:w-full lg:max-w-[200px] bg-white px-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
+        onChange={(e) => {
+          set(e.target.value);
+        }}
+      />
+    </div>
+  );
+}
+
 function RadarChart({ pokemon, smallDevice }) {
   const [level, setLevel] = useState();
   const [iv, setIV] = useState();
@@ -121,25 +141,6 @@ function RadarChart({ pokemon, smallDevice }) {
     ],
   };
 
-  function InputParam({ label, value }) {
-    return (
-      <div className="flex flex-col text-center items-center lg:items-center mx-10 md:mx-0 mb-2">
-        <label htmlFor="" className="text-gray-100 md:w-full lg:text-xl">
-          {label}
-        </label>
-        <input
-          type="text"
-          required
-          value={value}
-          placeholder={label}
-          className={`h-10 rounded-xl text-gray-700 w-5/6 lg:w-full lg:max-w-[200px] bg-white pl-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
-          onChange={(e) => {
-            setLevel(e.target.value);
-          }}
-        />
-      </div>
-    );
-  }
   return (
     <div
       className={`${
@@ -224,9 +225,24 @@ function RadarChart({ pokemon, smallDevice }) {
       </div>
       <div className="flex justify-center w-full mb-16 lg:w-1/3">
         <div className="w-full flex-col md:flex-row lg:flex-col lg:ml-10 flex items-around justify-center">
-          <InputParam label={"Level"} value={level} />
-          <InputParam label={"Individual Value"} value={iv} />
-          <InputParam label={"Effort Value"} value={ev} />
+          <InputParam
+            label={"Level"}
+            placeholder={"1-100"}
+            value={level}
+            set={setLevel}
+          />
+          <InputParam
+            label={"Individual Value"}
+            placeholder={"0-31"}
+            value={iv}
+            set={setIV}
+          />
+          <InputParam
+            label={"Effort Value"}
+            placeholder={"0-255"}
+            value={ev}
+            set={setEV}
+          />
         </div>
       </div>
     </div>

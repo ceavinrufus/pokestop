@@ -31,7 +31,7 @@ function PokemonStats({ pokemon, details, description }) {
               <div className="flex items-center justify-between">
                 <div className="">
                   {/* Tipe Pokemon */}
-                  <div className="flex gap-2">
+                  <div className="gap-2">
                     {pokemon.types &&
                       pokemon.types.map((type) => (
                         <div

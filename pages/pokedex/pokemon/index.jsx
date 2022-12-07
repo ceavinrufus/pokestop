@@ -63,7 +63,7 @@ export default function Home() {
 
       <Sidebar />
       <main>
-        <Navbar title={"Pokémon"} />
+        <Navbar title={"Pokémon"} textColor="white" />
 
         {!loading && (
           <>
