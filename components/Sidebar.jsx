@@ -20,11 +20,11 @@ export default function Sidebar() {
         className="h-[45px] flex items-center group md:px-6 lg:px-8 cursor-pointer hover:bg-[#E3350D] hover:text-white"
         onClick={props.onClick}
       >
-        <span className="rounded-full flex items-center group justify-center mr-2 hover:filter-none transition-filter">
+        <span className="rounded-full flex items-center group justify-center ml-3 md:ml-0 mr-2 hover:filter-none transition-filter">
           {props.leftIcon}
         </span>
-        <span className="md:mr-2">{props.children}</span>
-        <span className="rounded-full flex items-center justify-center mr-2 hover:filter-none ml-auto">
+        <span className="md:mr-2 text-sm md:text-base">{props.children}</span>
+        <span className="rounded-full flex items-center justify-center mr-3 md:mr-2 hover:filter-none ml-auto">
           {props.rightIcon}
         </span>
       </div>
@@ -40,10 +40,10 @@ export default function Sidebar() {
       ></div>
 
       <div
-        className={`transition duration-500 fixed min-h-screen lg:w-[200px] border rounded-r-xl overflow-hidden transition-height bg-white bg-[url('../public/assets/container_bg.png')] shadow-2xl z-40 md:text-sm lg:text-base ${
+        className={`transition duration-500 fixed min-h-screen w-[140px] md:w-[168px] lg:w-[200px] border rounded-r-xl overflow-hidden transition-height bg-white bg-[url('../public/assets/container_bg.png')] shadow-2xl z-40 md:text-sm lg:text-base ${
           open
             ? ""
-            : "-translate-x-[110px] md:-translate-x-[156px] lg:-translate-x-44"
+            : "-translate-x-[125px] md:-translate-x-[156px] lg:-translate-x-44"
         }`}
       >
         <div className="h-[40px] flex items-center md:px-6 lg:px-8 mb-10 mt-5">
@@ -51,7 +51,7 @@ export default function Sidebar() {
             onClick={() => {
               router.push("/");
             }}
-            className="md:text-base lg:text-xl text-[#E3350D]"
+            className="md:text-xl ml-3 text-base md:ml-0 lg:text-2xl text-[#E3350D]"
           >
             PokéStop
           </button>
@@ -109,7 +109,7 @@ export default function Sidebar() {
               onClick={() => setActiveMenu("main")}
               leftIcon={<IoArrowBack />}
             >
-              <h2>Pokédex</h2>
+              Pokédex
             </DropdownItem>
             <DropdownItem
               onClick={() => {
@@ -127,7 +127,7 @@ export default function Sidebar() {
                 </>
               }
             >
-              Pokemon
+              Pokémon
             </DropdownItem>
             <DropdownItem
               onClick={() => {
@@ -145,7 +145,7 @@ export default function Sidebar() {
                 </>
               }
             >
-              <div>Item</div>
+              Item
             </DropdownItem>
           </div>
         </CSSTransition>
@@ -177,8 +177,8 @@ export default function Sidebar() {
         <button
           className={`transition duration-500 w-[30px] lg:w-[50px] md:w-[40px] ${
             open
-              ? "translate-x-[108px] md:translate-x-[148px] lg:translate-x-[175px]"
-              : "-translate-x-0.5 md:-translate-x-2 lg:-translate-x-0"
+              ? "translate-x-[125px] md:translate-x-[148px] lg:translate-x-[175px]"
+              : "md:-translate-x-2 lg:-translate-x-0"
           }`}
           onClick={() => setOpen(!open)}
         >

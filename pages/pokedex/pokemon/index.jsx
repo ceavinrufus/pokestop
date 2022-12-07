@@ -65,12 +65,12 @@ export default function Home() {
         <Navbar title={"Pokémon"} />
 
         {!loading && (
-          <div className={`mx-12 my-4 lg:my-12 lg:mx-16 flex justify-center`}>
+          <div className={`mx-10 my-4 lg:my-12 lg:mx-16 flex justify-center`}>
             <InfiniteScroll
               dataLength={pokemons.length}
               next={() => setOffset(offset + limit)}
               hasMore={true}
-              className={`flex flex-wrap lg:gap-12 gap-8 justify-center max-w-[2000px]`}
+              className={`flex flex-wrap lg:gap-12 md:gap-8 gap-2 justify-center max-w-[2000px]`}
             >
               {pokemons.map((pokemon) => (
                 <Link
