@@ -1,10 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import {
-  capitalize,
-  capitalizeEachFirstLetter,
-  meterToFeet,
-} from "../functions/stringManipulation";
+import { capitalizeEachFirstLetter } from "../functions/stringManipulation";
 
 function NamaPokemon({ pokemon }) {
   return (

@@ -123,7 +123,7 @@ export default function PokemonDetails() {
                   }
                 >
                   <div className="h-full md:mt-4 lg:mt-8">
-                    <NamaPokemon pokemon={pokemon} />
+                    <NamaPokemon pokemon={pokemon} details={details} />
                     <PokemonStats
                       pokemon={pokemon}
                       details={details}

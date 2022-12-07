@@ -7,9 +7,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import RadarChart from "./RadarChart";
 import { types, hexToGrayscale } from "../functions/color";
-import Dropdown from "./Dropdown";
-import { capitalizeEachFirstLetter } from "../functions/stringManipulation";
-import NamaPokemon from "./NamaPokemon";
 import PokemonMainInfo from "./PokemonMainInfo";
 
 function PokemonStats({ pokemon, details, description }) {
@@ -31,16 +28,7 @@ function PokemonStats({ pokemon, details, description }) {
         >
           <SwiperSlide>
             <div className="mx-10 md:mx-16 lg:mx-24">
-              <div className="flex flex-col">
-                <div className="text-base md:text-2xl lg:text-5xl pb-1">
-                  <h1 className="text-[#be3265]">
-                    {details.is_mythical && "Mythical Pokémon"}
-                  </h1>
-                  <h1>{details.is_baby && "Baby Pokémon"}</h1>
-                  <h1 className="text-[#FFD300]">
-                    {details.is_legendary && "Legendary Pokémon"}
-                  </h1>
-                </div>
+              <div className="flex items-center justify-between">
                 <div className="">
                   {/* Tipe Pokemon */}
                   <div className="flex gap-2">
@@ -59,6 +47,53 @@ function PokemonStats({ pokemon, details, description }) {
                         </div>
                       ))}
                   </div>
+                </div>
+                <div className="text-base md:text-2xl lg:text-3xl pb-1">
+                  {details.is_mythical && (
+                    <h1
+                      style={{
+                        background: `${
+                          pokemon.types &&
+                          `linear-gradient(45deg, #BE3265, #000, #BE3265, #000)`
+                        }`,
+                      }}
+                      className={`border rounded-full px-2 py-1 md:px-4 md:py-2 text-${hexToGrayscale(
+                        "#BE3265"
+                      )} w-fit`}
+                    >
+                      Mythical Pokémon
+                    </h1>
+                  )}
+                  {details.is_baby && (
+                    <h1
+                      style={{
+                        background: `${
+                          pokemon.types &&
+                          `linear-gradient(45deg, #84BEE5, white, #84BEE5, white)`
+                        }`,
+                      }}
+                      className={`border rounded-full px-2 py-1 md:px-4 md:py-2 text-${hexToGrayscale(
+                        "#84BEE5"
+                      )} w-fit`}
+                    >
+                      Baby Pokémon
+                    </h1>
+                  )}
+                  {details.is_legendary && (
+                    <h1
+                      style={{
+                        background: `${
+                          pokemon.types &&
+                          `linear-gradient(45deg, #FFD300, white, #FFD300, white)`
+                        }`,
+                      }}
+                      className={`border rounded-full px-2 py-1 md:px-4 md:py-2 text-${hexToGrayscale(
+                        "#FFD300"
+                      )} w-fit`}
+                    >
+                      Legendary Pokémon
+                    </h1>
+                  )}
                 </div>
               </div>
               <div className="flex items-center h-[500px]">
@@ -102,7 +137,7 @@ function PokemonStats({ pokemon, details, description }) {
                   <PokemonMainInfo pokemon={pokemon} details={details} />
                 </div>
               </div>
-              <div className="w-1/2 h-[200px] md:min-h-[450px] flex justify-center gap-2">
+              <div className="w-1/2 h-[200px] md:min-h-[500px] flex justify-center gap-2">
                 {/* Pokemon Image 2 */}
                 <div className="w-[550px] flex">
                   <Image

@@ -10,10 +10,6 @@ import {
   Tooltip,
 } from "chart.js/auto";
 import { types, hexToGrayscale, hexToRgb } from "../functions/color";
-import {
-  capitalize,
-  capitalizeEachFirstLetter,
-} from "../functions/stringManipulation";
 
 ChartJS.register(
   LineElement,
@@ -164,28 +160,18 @@ function RadarChart({ pokemon, smallDevice }) {
               scales: {
                 r: {
                   grid: {
-                    //   circular: true,
+                    // circular: true,
                     lineWidth: 0.5,
                     color: "rgb(55, 65, 81, 0.8)",
-                    // color:
-                    //   pokemon.types &&
-                    //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
                   },
                   angleLines: {
                     lineWidth: 1.5,
                     color: "rgb(55, 65, 81, 0.8)",
-                    // color:
-                    //   pokemon.types &&
-                    //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
                   },
                   pointLabels: {
-                    //   backdropColor: "black",
                     color: "rgb(55, 65, 81, 0.8)",
-                    // color:
-                    //   pokemon.types &&
-                    //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
                     font: {
-                      size: 14,
+                      size: smallDevice ? 10 : 14,
                     },
                   },
                   ticks: {
