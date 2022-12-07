@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
@@ -5,11 +6,11 @@ import Image from "next/image";
 const NotFound = () => {
   const router = useRouter();
 
-  //   useEffect(() => {
-  //     setTimeout(() => {
-  //       router.push("/pokedex/pokemon");
-  //     }, 100000);
-  //   }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      router.push("/pokedex/pokemon");
+    }, 3000);
+  }, []);
   return (
     <>
       <Head>
@@ -18,7 +19,7 @@ const NotFound = () => {
         <link rel="icon" href="/assets/logo.png" />
       </Head>
 
-      <div className="bg-[url('../public/assets/background-pokemon.jpg')] bg- bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div>
+      <div className="bg-[url('../public/assets/background-pokemon.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div>
       <div
         className={`transition min-h-screen w-screen -z-40 opacity-80 fixed bg-black`}
       ></div>
@@ -30,8 +31,10 @@ const NotFound = () => {
           height={200}
         ></Image>
         <div className="flex flex-col items-center w-1/2 text-white outline-4">
-          <h1 className="text-[200px]">HO-OH!</h1>
-          <p className="text-3xl text-center">
+          <h1 className="text-[60px] md:text-[100px] lg:text-[200px]">
+            HO-OH!
+          </h1>
+          <p className="text-base md:text-2xl lg:text-3xl text-center">
             The requested page{" "}
             <span className="bg-black p-1">{window.location.pathname}</span>{" "}
             could not be found. Check that you typed the URL correctly!
