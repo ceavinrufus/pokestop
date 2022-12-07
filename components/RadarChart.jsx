@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Radar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -24,7 +24,11 @@ ChartJS.register(
   Filler
 );
 
-function RadarChart({ pokemon, level, iv, ev }) {
+function RadarChart({ pokemon, smallDevice }) {
+  const [level, setLevel] = useState();
+  const [iv, setIV] = useState();
+  const [ev, setEV] = useState();
+
   var maxIV = 31;
   var maxEV = 255;
 
@@ -92,11 +96,14 @@ function RadarChart({ pokemon, level, iv, ev }) {
   // var minOther = Math.floor((Math.floor(2 * base * (level / 100)) + 5) * 0.9);
 
   const data = {
-    labels:
-      pokemon.stats &&
-      pokemon.stats.map((stat) =>
-        capitalizeEachFirstLetter(stat.stat.name, "-")
-      ),
+    labels: [
+      "HP",
+      "Attack",
+      "Defense",
+      smallDevice ? "S. Attack" : "Special Attack",
+      smallDevice ? "S. Defense" : "Special Defense",
+      "Speed",
+    ],
     datasets: [
       {
         label: "Base Stats",
@@ -119,83 +126,150 @@ function RadarChart({ pokemon, level, iv, ev }) {
   };
 
   return (
-    <Radar
-      data={data}
-      options={{
-        scale: {
-          ticks: {
-            beginAtZero: true,
-            min: 0,
-            userCallback: function (label, index, labels) {
-              // when the floored value is the same as the value we have a whole number
-              if (Math.floor(label) === label) {
-                return label;
-              }
-            },
-          },
-        },
-        responsive: true,
-        maintainAspectRatio: false,
-        scale: {
-          ticks: {
-            beginAtZero: true,
-            max: 5,
-          },
-        },
-        scales: {
-          r: {
-            grid: {
-              //   circular: true,
-              lineWidth: 0.5,
-              color: "rgb(55, 65, 81, 0.8)",
-              // color:
-              //   pokemon.types &&
-              //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
-            },
-            angleLines: {
-              lineWidth: 1.5,
-              color: "rgb(55, 65, 81, 0.8)",
-              // color:
-              //   pokemon.types &&
-              //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
-            },
-            pointLabels: {
-              //   backdropColor: "black",
-              color: "rgb(55, 65, 81, 0.8)",
-              // color:
-              //   pokemon.types &&
-              //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
-              font: {
-                size: 14,
+    <div
+      className={`${
+        smallDevice && "flex items-center flex-col"
+      } justify-center`}
+    >
+      <div className="flex justify-center md:w-full w-[300px] h-[300px] md:h-[400px] lg:h-[500px] items-center rounded-full pb-8">
+        <div
+          className={`flex lg:w-4/5 md:w-fit h-full rounded-xl text-gray-700 bg-white text-${
+            pokemon.types &&
+            hexToGrayscale(types[pokemon.types[0].type.name][1])
+          } py-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
+        >
+          <Radar
+            data={data}
+            options={{
+              scale: {
+                ticks: {
+                  beginAtZero: true,
+                  min: 0,
+                  userCallback: function (label, index, labels) {
+                    // when the floored value is the same as the value we have a whole number
+                    if (Math.floor(label) === label) {
+                      return label;
+                    }
+                  },
+                },
               },
-            },
-            ticks: {
-              // display: false,
-              borderColor: "black",
-              backdropColor:
-                pokemon.types && types[pokemon.types[0].type.name][1],
-              // color: "black",
-              color:
+              responsive: true,
+              maintainAspectRatio: false,
+              scale: {
+                ticks: {
+                  beginAtZero: true,
+                  max: 5,
+                },
+              },
+              scales: {
+                r: {
+                  grid: {
+                    //   circular: true,
+                    lineWidth: 0.5,
+                    color: "rgb(55, 65, 81, 0.8)",
+                    // color:
+                    //   pokemon.types &&
+                    //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
+                  },
+                  angleLines: {
+                    lineWidth: 1.5,
+                    color: "rgb(55, 65, 81, 0.8)",
+                    // color:
+                    //   pokemon.types &&
+                    //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
+                  },
+                  pointLabels: {
+                    //   backdropColor: "black",
+                    color: "rgb(55, 65, 81, 0.8)",
+                    // color:
+                    //   pokemon.types &&
+                    //   hexToGrayscale(types[pokemon.types[0].type.name][1]),
+                    font: {
+                      size: 14,
+                    },
+                  },
+                  ticks: {
+                    display: !smallDevice,
+                    borderColor: "black",
+                    backdropColor:
+                      pokemon.types && types[pokemon.types[0].type.name][1],
+                    // color: "black",
+                    color:
+                      pokemon.types &&
+                      hexToGrayscale(types[pokemon.types[0].type.name][1]),
+                    font: {
+                      size: 14,
+                    },
+                    // maxTicksLimit: 7,
+                  },
+                  suggestedMin: 0,
+                  suggestedMax: Math.max(...maxStatsAt),
+                  min: 0,
+                  max: Math.max(...maxStatsAt),
+                },
+              },
+              plugins: {
+                legend: {
+                  display: false,
+                },
+              },
+            }}
+          ></Radar>{" "}
+        </div>
+      </div>
+      <div className="flex justify-center w-full mb-16">
+        <div className="w-full flex-wrap space-y-2 md:flex-nowrap flex items-center justify-center md:w-3/4">
+          <div className="flex justify-center items-center space-x-2 w-48">
+            <label htmlFor="" className="text-gray-100 lg:text-xl">
+              Level
+            </label>
+            <input
+              type="text"
+              required
+              value={level}
+              placeholder="Level"
+              className={`w-1/2 h-10 rounded-xl text-gray-700 bg-white text-${
                 pokemon.types &&
-                hexToGrayscale(types[pokemon.types[0].type.name][1]),
-              font: {
-                size: 14,
-              },
-              // maxTicksLimit: 7,
-            },
-            suggestedMin: 0,
-            suggestedMax: Math.max(...maxStatsAt),
-            min: 0,
-            max: Math.max(...maxStatsAt),
-          },
-        },
-        plugins: {
-          legend: {
-            display: false,
-          },
-        },
-      }}
-    ></Radar>
+                hexToGrayscale(types[pokemon.types[0].type.name][1])
+              }  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
+              onChange={(e) => {
+                setLevel(e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex justify-center items-center space-x-2 w-48">
+            <label htmlFor="" className="text-gray-100 lg:text-xl">
+              IV
+            </label>
+            <input
+              type="text"
+              required
+              value={iv}
+              placeholder="IV"
+              className="w-1/2 h-10 rounded-xl text-gray-700 bg-white  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500"
+              onChange={(e) => {
+                setIV(e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex justify-center items-center space-x-2 w-48">
+            <label htmlFor="" className="text-gray-100 lg:text-xl">
+              EV
+            </label>
+            <input
+              type="text"
+              required
+              value={ev}
+              placeholder="EV"
+              className="w-1/2 h-10 rounded-xl text-gray-700 bg-white  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500"
+              onChange={(e) => {
+                setEV(e.target.value);
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

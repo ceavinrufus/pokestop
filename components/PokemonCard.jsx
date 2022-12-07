@@ -11,8 +11,8 @@ const Card = ({ pokemon }) => {
   const color = pokemon.types[0].type.name;
   return (
     <div className="shadow-2xl rounded-3xl gap-4">
-      <div className="flex items-center rounded-3xl hover:bg-transparent hover:translate-y-1 hover:text-white border border-white transition text-[#323232] bg-white justify-between p-8 h-[250px] w-[300px]">
-        <div className={`text-xl`}>
+      <div className="flex items-center rounded-3xl hover:bg-transparent hover:translate-y-1 hover:text-white border border-white transition text-[#323232] bg-white justify-between p-2 md:p-4 lg:p-8 h-[120px] w-[140px] md:h-[160px] md:w-[200px] lg:h-[250px] lg:w-[300px]">
+        <div className={`text-xs lg:text-xl md:text-sm`}>
           {/* Nomor Pokemon */}
           <p>#{("000" + pokemon.id).slice(-3)}</p>
           {/* Nama Pokemon */}
@@ -20,15 +20,19 @@ const Card = ({ pokemon }) => {
             {pokemon ? pokemon.name.split(" ").map(capitalize).join(" ") : ""}
           </h1>
           {/* Logo Tipe */}
-          <div className="flex gap-1">
+          <div className="flex md:gap-1">
             {pokemon.types.map((type) => (
-              <Image
+              <div
                 key={type.type.name}
-                src={`https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Types/POKEMON_TYPE_${type.type.name.toUpperCase()}_BORDERED.png`}
-                height={30}
-                width={30}
-                alt={type.type.name}
-              />
+                className="flex gap-1 w-[14px] md:w-[20px] lg:w-[30px]"
+              >
+                <Image
+                  src={`https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Types/POKEMON_TYPE_${type.type.name.toUpperCase()}_BORDERED.png`}
+                  width={30}
+                  height={30}
+                  alt={type.type.name}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -37,7 +41,7 @@ const Card = ({ pokemon }) => {
             style={{
               background: `linear-gradient(45deg, ${types[color][1]}, ${types[color][0]})`,
             }}
-            className="rounded-full h-[100px] w-[100px] pb-20"
+            className="rounded-full h-[30px] md:h-[80px] w-[50px] md:w-[80px] lg:h-[100px] lg:w-[100px] leading-3 pb-[50px]"
           >
             <Image
               src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(

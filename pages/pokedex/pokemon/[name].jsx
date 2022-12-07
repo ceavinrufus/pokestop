@@ -1,5 +1,5 @@
 import Head from "next/head";
-import DropdownMenu from "../../../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
@@ -11,11 +11,11 @@ import {
   capitalizeEachFirstLetter,
 } from "../../../functions/stringManipulation";
 import NotFound from "../../../components/NotFound";
+import NamaPokemon from "../../../components/NamaPokemon";
 
 export default function PokemonDetails() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
   const [pokemon, setPokemon] = useState([]);
   const [details, setDetails] = useState([]);
   const [description, setDescription] = useState([]);
@@ -77,7 +77,7 @@ export default function PokemonDetails() {
                 <link rel="icon" href={`/assets/logo.png`} />
               </Head>
 
-              <DropdownMenu open={open} setOpen={setOpen} />
+              <Sidebar />
 
               {/* <div className="bg-[url('../public/assets/background.jpg')] bg-no-repeat bg-cover fixed min-h-screen w-screen -z-50"></div> */}
               <div
@@ -97,18 +97,20 @@ export default function PokemonDetails() {
 
               <main>
                 <div
-                  className={`h-[150px] flex items-center justify-start mx-24`}
+                  className={`h-[100px] md:h-[125px] lg:h-[150px] flex items-center justify-start mx-10 md:mx-16 lg:mx-24`}
                 >
                   <Link href="/">
                     <a
                       className={
                         pokemon.types &&
-                        `text-3xl w-full text-${hexToGrayscale(
+                        `w-full text-${hexToGrayscale(
                           types[pokemon.types[0].type.name][1]
                         )}`
                       }
                     >
-                      <h1 className="text-left text-5xl w-full">PokéStop</h1>
+                      <h1 className="text-left text-xl md:text-3xl lg:text-5xl w-full">
+                        PokéStop
+                      </h1>
                     </a>
                   </Link>
                 </div>
@@ -120,7 +122,8 @@ export default function PokemonDetails() {
                     )}`
                   }
                 >
-                  <div className="h-full mt-8">
+                  <div className="h-full md:mt-4 lg:mt-8">
+                    <NamaPokemon pokemon={pokemon} />
                     <PokemonStats
                       pokemon={pokemon}
                       details={details}

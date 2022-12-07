@@ -14,187 +14,133 @@ import PokemonMainInfo from "./PokemonMainInfo";
 
 function PokemonStats({ pokemon, details, description }) {
   const router = useRouter();
-  const [level, setLevel] = useState();
-  const [iv, setIV] = useState();
-  const [ev, setEV] = useState();
 
   return (
     <>
-      <Swiper
-        grabCursor={true}
-        centeredSlides={true}
-        modules={[Pagination, Navigation, A11y, Scrollbar]}
-        autoplay={{ delay: 5000 }}
-        navigation
-        pagination={{
-          dynamicBullets: true,
-        }}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <div className="mx-24">
-            <div className="flex justify-between">
-              <div className="">
-                <NamaPokemon pokemon={pokemon} />
-                {/* Tipe Pokemon */}
-                <div className="flex gap-2">
-                  {pokemon.types &&
-                    pokemon.types.map((type) => (
-                      <div
-                        key={type.type.name}
-                        className="flex flex-col items-center m-2"
-                      >
-                        <Image
-                          src={`https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/Types/POKEMON_TYPE_${type.type.name.toUpperCase()}.png`}
-                          height={40}
-                          width={40}
-                          alt={type.type.name}
-                        />
-                        <h3 className="text-xl">
-                          {capitalizeEachFirstLetter(type.type.name, " ")}
-                        </h3>
-                      </div>
-                    ))}
+      <div className="">
+        <Swiper
+          grabCursor={true}
+          centeredSlides={true}
+          modules={[Pagination, Navigation, A11y, Scrollbar]}
+          autoplay={{ delay: 5000 }}
+          navigation
+          pagination={{
+            dynamicBullets: true,
+          }}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <div className="mx-10 md:mx-16 lg:mx-24">
+              <div className="flex flex-col">
+                <div className="text-base md:text-2xl lg:text-5xl pb-1">
+                  <h1 className="text-[#be3265]">
+                    {details.is_mythical && "Mythical Pokémon"}
+                  </h1>
+                  <h1>{details.is_baby && "Baby Pokémon"}</h1>
+                  <h1 className="text-[#FFD300]">
+                    {details.is_legendary && "Legendary Pokémon"}
+                  </h1>
+                </div>
+                <div className="">
+                  {/* Tipe Pokemon */}
+                  <div className="flex gap-2">
+                    {pokemon.types &&
+                      pokemon.types.map((type) => (
+                        <div
+                          key={type.type.name}
+                          className="flex flex-col items-center w-[100px] md:w-[120px] lg:w-[160px] -translate-x-2.5 md:-translate-x-3 lg:-translate-x-4 -mr-6"
+                        >
+                          <Image
+                            src={`/assets/icon_type/typeIconText_${type.type?.name}.png`}
+                            height={40}
+                            width={160}
+                            alt={type.type.name}
+                          />
+                        </div>
+                      ))}
+                  </div>
                 </div>
               </div>
-              <h1
-                style={{
-                  writingMode: "vertical-rl",
-                  textOrientation: "upright",
-                }}
-                className="text-8xl text-left min-h-[450px]"
-              >
-                {
-                  details.names?.find((name) => name.language?.name == "ja")
-                    .name
-                }
-              </h1>
-            </div>
-            <div className="flex">
-              <div className="flex -mt-80 justify-center w-full rounded-full pb-20">
-                <h1
-                  className={`-mt-12 absolute text-[350px] text-opacity-100 text-${
-                    pokemon.types &&
-                    hexToGrayscale(types[pokemon.types[0].type.name][1])
-                  }`}
-                >
-                  {pokemon.id && `#${("000" + pokemon.id).slice(-3)}`}
-                </h1>
-                {/* Pokemon Image */}
-                <Image
-                  src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
-                    "000" + pokemon.id
-                  ).slice(-3)}.png`}
-                  height={450}
-                  width={450}
-                  alt={pokemon.name}
-                />
-              </div>
-            </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="mx-24 grid grid-cols-2">
-            <div
-              className={`flex flex-col text-${
-                pokemon.types &&
-                hexToGrayscale(types[pokemon.types[0].type.name][1])
-              }`}
-            >
-              <NamaPokemon pokemon={pokemon} />
-              <h2 className="text-xl my-8">
-                {description[0] &&
-                  description[0].flavor_text.replace("\f", "\n")}
-              </h2>
-              <div className={`flex justify-start`}>
-                <PokemonMainInfo pokemon={pokemon} details={details} />
-              </div>
-            </div>
-            <div className="flex flex-col items-center w-full">
-              <div className="flex justify-center w-3/4 h-[500px] items-center rounded-full pb-8">
-                <div
-                  className={`flex w-3/4 justify-center h-full rounded-xl text-gray-700 bg-white text-${
-                    pokemon.types &&
-                    hexToGrayscale(types[pokemon.types[0].type.name][1])
-                  } py-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
-                >
-                  <RadarChart pokemon={pokemon} level={level} iv={iv} ev={ev} />
-                </div>
-              </div>
-              <div className="flex justify-center w-full mb-16">
-                <div className="flex items-center justify-center">
-                  <div className="flex justify-center items-center space-x-2 w-48">
-                    <label htmlFor="" className="text-gray-100 md:text-xl ml-1">
-                      Level
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={level}
-                      placeholder="Level"
-                      className={`w-1/2 h-10 rounded-xl text-gray-700 bg-white text-${
-                        pokemon.types &&
-                        hexToGrayscale(types[pokemon.types[0].type.name][1])
-                      }  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500`}
-                      onChange={(e) => {
-                        setLevel(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="flex justify-center items-center space-x-2 w-48">
-                    <label htmlFor="" className="text-gray-100 md:text-xl ml-1">
-                      IV
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={iv}
-                      placeholder="IV"
-                      className="w-1/2 h-10 rounded-xl text-gray-700 bg-white  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500"
-                      onChange={(e) => {
-                        setIV(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="flex justify-center items-center space-x-2 w-48">
-                    <label htmlFor="" className="text-gray-100 md:text-xl ml-1">
-                      EV
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={ev}
-                      placeholder="EV"
-                      className="w-1/2 h-10 rounded-xl text-gray-700 bg-white  pl-4 shadow-lg focus:outline-none placeholder:text-gray-500"
-                      onChange={(e) => {
-                        setEV(e.target.value);
-                      }}
-                    />
-                  </div>
-                  {/* <div className="flex justify-center items-center space-x-2">
-                  <label
-                    htmlFor=""
-                    className="text-gray-100 md:text-xl ml-1"
+              <div className="flex items-center h-[500px]">
+                <div className="flex items-center justify-center w-full rounded-full pb-20">
+                  <h1
+                    className={`lg:-mt-12 absolute text-[150px] md:text-[250px] lg:text-[350px] text-opacity-20 text-${
+                      pokemon.types &&
+                      hexToGrayscale(types[pokemon.types[0].type.name][1])
+                    }`}
                   >
-                    Nature
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={ev}
-                    placeholder="EV"
-                    className="w-1/2 h-10 rounded-xl text-gray-700 bg-white bg-opacity-75 pl-4 shadow-lg focus:outline-none placeholder:text-gray-500"
-                    onChange={(e) => {
-                      setEV(e.target.value);
-                    }}
-                  />
-                </div> */}
+                    {pokemon.id && `#${("000" + pokemon.id).slice(-3)}`}
+                  </h1>
+                  {/* Pokemon Image */}
+                  <div className="w-[180px] lg:w-[450px] md:w-[380px]">
+                    <Image
+                      src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
+                        "000" + pokemon.id
+                      ).slice(-3)}.png`}
+                      height={450}
+                      width={450}
+                      alt={pokemon.name}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </SwiperSlide>
-      </Swiper>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="md:mx-16 lg:mx-24 items-center flex gap-6 md:flex-row flex-col-reverse">
+              <div
+                className={`flex flex-col justify-center mx-12 md:mx-0 md:w-1/2 text-${
+                  pokemon.types &&
+                  hexToGrayscale(types[pokemon.types[0].type.name][1])
+                }`}
+              >
+                <h2 className="text-xs md:text-base lg:text-xl md:my-8">
+                  {description[0] &&
+                    description[0].flavor_text.replace("\f", "\n")}
+                </h2>
+                <div className={`flex justify-start mb-12`}>
+                  <PokemonMainInfo pokemon={pokemon} details={details} />
+                </div>
+              </div>
+              <div className="w-1/2 h-[200px] md:min-h-[450px] flex justify-center gap-2">
+                {/* Pokemon Image 2 */}
+                <div className="w-[550px] flex">
+                  <Image
+                    src={pokemon.sprites.other.dream_world?.front_default}
+                    width={600}
+                    height={600}
+                    alt={pokemon.id}
+                  />
+                </div>
+                <h1
+                  style={{
+                    writingMode: "vertical-rl",
+                    textOrientation: "upright",
+                  }}
+                  className="text-3xl md:text-6xl lg:text-8xl text-center "
+                >
+                  {
+                    details.names?.find((name) => name.language?.name == "ja")
+                      .name
+                  }
+                </h1>
+              </div>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="md:mx-16 lg:mx-24 flex gap-6">
+              <div className="flex flex-col w-full">
+                <div className="md:flex flex-col mt-8 w-full hidden">
+                  <RadarChart pokemon={pokemon} smallDevice={false} />
+                </div>
+                <div className="flex flex-col mt-8 w-full md:hidden">
+                  <RadarChart pokemon={pokemon} smallDevice={true} />
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </>
   );
 }

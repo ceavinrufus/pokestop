@@ -9,21 +9,23 @@ import {
 function PokemonMainInfo({ pokemon, details }) {
   return (
     <>
-      <table className="">
+      <table className="w-full lg:w-2/3">
         <tbody
-          className={`text-xl text-left divide-y-2 divide-${
+          className={`text-xs md:text-md lg:text-xl text-left divide-y-2 divide-${
             pokemon.types &&
             hexToGrayscale(types[pokemon.types[0].type?.name][1])
           }`}
         >
           <tr>
-            <th className="pl-4 font-thin pr-16">National No</th>
+            <th className="lg:pl-4 md:pl-2 font-thin">National No</th>
             <td className="pr-4 py-2">
               {pokemon.id && `#${("000" + pokemon.id).slice(-3)}`}
             </td>
           </tr>
           <tr>
-            <th className="pl-4 font-thin pr-16">Category</th>
+            <th className="lg:pl-4 md:pl-2 font-thin md:pr-8 lg:pr-16">
+              Category
+            </th>
             <td className="pr-4 py-2">
               {details.genera &&
                 `${
@@ -32,7 +34,7 @@ function PokemonMainInfo({ pokemon, details }) {
             </td>
           </tr>
           <tr>
-            <th className="pl-4 font-thin pr-16">Ability(s)</th>
+            <th className="lg:pl-4 md:pl-2 font-thin">Ability(s)</th>
             <td className="pr-4 py-2">
               {pokemon.abilities &&
                 pokemon.abilities.map((ability) =>
@@ -55,26 +57,26 @@ function PokemonMainInfo({ pokemon, details }) {
             </td>
           </tr>
           <tr>
-            <th className="pl-4 font-thin pr-16">Weight</th>
+            <th className="lg:pl-4 md:pl-2 font-thin">Weight</th>
             <td className="pr-4 py-2">
               {pokemon.weight / 10} kg (
               {((pokemon.weight / 10) * 2.2046).toFixed(1)} lbs)
             </td>
           </tr>
           <tr>
-            <th className="pl-4 font-thin pr-16">Height</th>
+            <th className="lg:pl-4 md:pl-2 font-thin">Height</th>
             <td className="pr-4 py-2">
               {pokemon.height / 10} m ({meterToFeet(pokemon.height / 10)})
             </td>
           </tr>
           <tr>
-            <th className="pl-4 font-thin pr-16">Shape</th>
+            <th className="lg:pl-4 md:pl-2 font-thin">Shape</th>
             <td className="pr-4 py-2">
               {details.shape && capitalize(details.shape?.name)}
             </td>
           </tr>
           <tr>
-            <th className="pl-4 font-thin pr-16">Color</th>
+            <th className="lg:pl-4 md:pl-2 font-thin">Color</th>
             <td className="pr-4 py-2">
               {details.shape && capitalize(details.color?.name)}
             </td>

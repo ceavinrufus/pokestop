@@ -5,7 +5,7 @@ import Card from "../../../components/PokemonCard";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import DropdownMenu from "../../../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function Home() {
@@ -60,17 +60,17 @@ export default function Home() {
       {/* <div className="bg-[url('../public/assets/container_bg.png')] bg-repeat fixed min-h-screen w-screen -z-50"></div> */}
       <div className="bg-[url('../public/assets/body_bg.png')] bg-repeat fixed min-h-screen w-screen -z-50"></div>
 
-      <DropdownMenu open={open} setOpen={setOpen} />
+      <Sidebar />
       <main>
         <Navbar title={"Pokémon"} />
 
         {!loading && (
-          <div className={`my-12 mx-16 flex justify-center`}>
+          <div className={`mx-12 my-4 lg:my-12 lg:mx-16 flex justify-center`}>
             <InfiniteScroll
               dataLength={pokemons.length}
               next={() => setOffset(offset + limit)}
               hasMore={true}
-              className={`flex flex-wrap gap-12 justify-center max-w-[2000px]`}
+              className={`flex flex-wrap lg:gap-12 gap-8 justify-center max-w-[2000px]`}
             >
               {pokemons.map((pokemon) => (
                 <Link

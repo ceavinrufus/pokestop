@@ -9,20 +9,21 @@ import { TbPokeball } from "react-icons/tb";
 import { TiDevicePhone } from "react-icons/ti";
 import Image from "next/image";
 
-export default function Sidebar({ open, setOpen }) {
+export default function Sidebar() {
+  const [open, setOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState("main");
   const router = useRouter();
 
   function DropdownItem(props) {
     return (
       <div
-        className="h-[45px] flex items-center group px-8 cursor-pointer hover:bg-[#E3350D] hover:text-white"
+        className="h-[45px] flex items-center group md:px-6 lg:px-8 cursor-pointer hover:bg-[#E3350D] hover:text-white"
         onClick={props.onClick}
       >
         <span className="rounded-full flex items-center group justify-center mr-2 hover:filter-none transition-filter">
           {props.leftIcon}
         </span>
-        {props.children}
+        <span className="md:mr-2">{props.children}</span>
         <span className="rounded-full flex items-center justify-center mr-2 hover:filter-none ml-auto">
           {props.rightIcon}
         </span>
@@ -39,16 +40,18 @@ export default function Sidebar({ open, setOpen }) {
       ></div>
 
       <div
-        className={`transition duration-500 fixed min-h-screen w-[200px] border rounded-r-xl overflow-hidden transition-height bg-white bg-[url('../public/assets/container_bg.png')] shadow-2xl z-40 ${
-          open ? "" : "-translate-x-44"
+        className={`transition duration-500 fixed min-h-screen lg:w-[200px] border rounded-r-xl overflow-hidden transition-height bg-white bg-[url('../public/assets/container_bg.png')] shadow-2xl z-40 md:text-sm lg:text-base ${
+          open
+            ? ""
+            : "-translate-x-[110px] md:-translate-x-[156px] lg:-translate-x-44"
         }`}
       >
-        <div className="h-[40px] flex items-center px-8 mb-10 mt-5">
+        <div className="h-[40px] flex items-center md:px-6 lg:px-8 mb-10 mt-5">
           <button
             onClick={() => {
               router.push("/");
             }}
-            className="text-xl text-[#E3350D]"
+            className="md:text-base lg:text-xl text-[#E3350D]"
           >
             PokéStop
           </button>
@@ -172,8 +175,10 @@ export default function Sidebar({ open, setOpen }) {
       </div>
       <div className="fixed z-50 min-h-screen flex">
         <button
-          className={`transition duration-500 ${
-            open ? "translate-x-[168px]" : "-translate-x-2"
+          className={`transition duration-500 w-[30px] lg:w-[50px] md:w-[40px] ${
+            open
+              ? "translate-x-[108px] md:translate-x-[148px] lg:translate-x-[175px]"
+              : "-translate-x-0.5 md:-translate-x-2 lg:-translate-x-0"
           }`}
           onClick={() => setOpen(!open)}
         >
