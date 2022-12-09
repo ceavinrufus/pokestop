@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { capitalizeEachFirstLetter } from "../functions/stringManipulation";
 
 function NamaPokemon({ pokemon }) {
+  const [src, setSrc] = useState(
+    `https://www.cpokemon.com/pokes/shuffle/${pokemon.id}.png`
+  );
   return (
     <>
       <div className="mx-10 md:mx-16 lg:mx-28">
@@ -14,14 +17,11 @@ function NamaPokemon({ pokemon }) {
           {/* Icon */}
           <div className="w-[40px] lg:w-[80px] md:w-[60px] flex">
             <Image
-              src={
-                pokemon.id <= 999
-                  ? `https://www.cpokemon.com/pokes/shuffle/${pokemon.id}.png`
-                  : `/assets/pokeball.png`
-              }
+              src={src}
               height={80}
               width={80}
               alt={pokemon.name}
+              onError={() => setSrc("/assets/egg.png")}
             />
           </div>
         </div>

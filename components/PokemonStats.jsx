@@ -109,12 +109,12 @@ function PokemonStats({ pokemon, details, description }) {
                   {/* Pokemon Image */}
                   <div className="w-[180px] lg:w-[450px] md:w-[380px]">
                     <Image
-                      src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
-                        "000" + pokemon.id
-                      ).slice(-3)}.png`}
-                      height={450}
-                      width={450}
-                      alt={pokemon.name}
+                      src={
+                        pokemon.sprites.other["official-artwork"].front_default
+                      }
+                      width={600}
+                      height={600}
+                      alt={pokemon.id}
                     />
                   </div>
                 </div>
@@ -139,9 +139,12 @@ function PokemonStats({ pokemon, details, description }) {
               </div>
               <div className="w-1/2 h-[200px] md:min-h-[500px] flex justify-center gap-2">
                 {/* Pokemon Image 2 */}
-                <div className="w-[550px] flex">
+                <div className={`w-[550px] flex animate-float`}>
                   <Image
-                    src={pokemon.sprites.other.dream_world?.front_default}
+                    src={
+                      pokemon.sprites.other.dream_world?.front_default ||
+                      pokemon.sprites.other["official-artwork"].front_default
+                    }
                     width={600}
                     height={600}
                     alt={pokemon.id}

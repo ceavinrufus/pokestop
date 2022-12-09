@@ -29,7 +29,6 @@ export default function PokemonDetails() {
           .then((res) => {
             const getPokemon = async () => {
               try {
-                console.log(res);
                 setPokemon(res.data);
                 await axios.get(res.data.species.url).then((res) => {
                   const getDetails = async () => {
@@ -63,7 +62,7 @@ export default function PokemonDetails() {
     <>
       {!loading && (
         <div>
-          {pokemon.id ? (
+          {pokemon.id <= 905 ? (
             <>
               <Head>
                 <title>

@@ -5,27 +5,26 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    screens: {
-      xs: "425px",
-      sm: "640px",
-      // => @media (min-width: 640px) { ... }
-
-      md: "768px",
-      // => @media (min-width: 768px) { ... }
-
-      lg: "1024px",
-      // => @media (min-width: 1024px) { ... }
-
-      xl: "1280px",
-      // => @media (min-width: 1280px) { ... }
-
-      "2xl": "1536px",
-      // => @media (min-width: 1536px) { ... }
-    },
     extend: {
+      screens: {
+        xs: "425px",
+      },
       fontFamily: {
         Pokemon: "PocketMonk",
         BreeSerif: "BreeSerif",
+      },
+      animation: {
+        float: "float 3s ease-in-out infinite",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": {
+            transform: "translatey(5%)",
+          },
+          "50%": {
+            transform: "translatey(0px)",
+          },
+        },
       },
     },
   },

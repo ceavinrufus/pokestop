@@ -70,8 +70,13 @@ export default function Home() {
             <div className={`lg:mx-28 my-4 flex justify-center min-w-screen`}>
               <InfiniteScroll
                 dataLength={pokemons.length}
-                next={() => setOffset(offset + limit)}
-                hasMore={true}
+                next={() => {
+                  setOffset(offset + limit);
+                  if (pokemons.length + limit > 905) {
+                    setLimit(905 - (offset + limit));
+                  }
+                }}
+                hasMore={offset + limit < 900}
                 className={`flex flex-wrap lg:gap-12 md:gap-8 gap-2 justify-center max-w-[2000px]`}
               >
                 {pokemons.map((pokemon) => (
