@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { capitalizeEachFirstLetter } from "../functions/stringManipulation";
 import Image from "next/image";
+import { CgPokemon } from "react-icons/cg";
 
 function Search() {
   const router = useRouter();
@@ -51,9 +52,19 @@ function Search() {
       </div>
 
       {query.length > 0 && previews.length > 0 && (
-        <div className="absolute bg-[#303030] border-2 left-0 w-full z-50 rounded-lg">
+        <div className="absolute bg-[#303030] border-2 left-0 w-full z-50 rounded-lg text-white">
           {previews.map((preview, id) => (
-            <div key={id} className="flex items-center px-3">
+            <div
+              key={id}
+              className={`flex items-center px-3 cursor-pointer hover:bg-[#535353] transition ${
+                id == 0 && "rounded-t-lg"
+              } ${id == previews.length - 1 && "rounded-b-lg"}`}
+              onClick={() => {
+                router
+                  .push("/pokedex/pokemon/" + preview.name)
+                  .then(() => router.reload());
+              }}
+            >
               <div className="mr-3">
                 <Image
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${preview.url.slice(

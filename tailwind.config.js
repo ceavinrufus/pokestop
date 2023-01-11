@@ -15,6 +15,8 @@ module.exports = {
       },
       animation: {
         float: "float 3s ease-in-out infinite",
+        slideInFromLeft: "slideInFromLeft 0.5s ease-out 0s 1",
+        slideInFromRight: "slideInFromRight 0.5s ease-out 0s 1",
       },
       keyframes: {
         float: {
@@ -24,6 +26,14 @@ module.exports = {
           "50%": {
             transform: "translatey(0px)",
           },
+        },
+        slideInFromLeft: {
+          "0%": { opacity: "0", transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        slideInFromRight: {
+          "0%": { opacity: "0", transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0)" },
         },
       },
     },

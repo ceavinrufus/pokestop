@@ -57,7 +57,7 @@ export default function Home() {
 
       <DropdownMenu open={open} setOpen={setOpen} />
       <main>
-        <Navbar title={"Item"} />
+        <Navbar title={"Item"} textColor="white" />
 
         <div
           className={`grid transition duration-500 my-12 mx-32 grid-cols-[2fr_1fr] justify-center max-w-screen`}

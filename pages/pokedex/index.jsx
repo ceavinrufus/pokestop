@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 
 function Pokedex() {
-  const router = useRouter();
+  // const router = useRouter();
 
-  useEffect(() => {
-    router.push("pokedex/pokemon");
-  }, []);
+  // useEffect(() => {
+  //   router.push("pokedex/pokemon");
+  // }, []);
   return <></>;
 }
 

@@ -99,7 +99,7 @@ function PokemonStats({ pokemon, details, description }) {
               <div className="flex items-center h-[500px]">
                 <div className="flex items-center justify-center w-full rounded-full pb-20">
                   <h1
-                    className={`lg:-mt-12 absolute text-[150px] md:text-[250px] lg:text-[350px] text-opacity-20 text-${
+                    className={`lg:-mt-12 absolute text-[150px] md:text-[250px] lg:text-[350px] text-opacity-20 animate-slideInFromRight text-${
                       pokemon.types &&
                       hexToGrayscale(types[pokemon.types[0].type.name][1])
                     }`}
@@ -107,7 +107,7 @@ function PokemonStats({ pokemon, details, description }) {
                     {pokemon.id && `#${("000" + pokemon.id).slice(-3)}`}
                   </h1>
                   {/* Pokemon Image */}
-                  <div className="w-[180px] lg:w-[450px] md:w-[380px]">
+                  <div className="w-[180px] lg:w-[450px] md:w-[380px] animate-slideInFromLeft">
                     <Image
                       src={
                         pokemon.sprites.other["official-artwork"].front_default

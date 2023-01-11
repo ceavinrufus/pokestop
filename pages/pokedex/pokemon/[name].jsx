@@ -56,7 +56,7 @@ export default function PokemonDetails() {
       };
       getPokemons();
     }
-  }, [router.isReady]);
+  }, [router.isReady, name]);
 
   return (
     <>
