@@ -9,6 +9,7 @@ function Search() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [previews, setPreviews] = useState("");
+  const [suggest, setSuggest] = useState([]);
 
   const onChange = (e) => {
     e.preventDefault();
@@ -35,12 +36,33 @@ function Search() {
       .catch((err) => console.log(err));
   };
 
+  const onBlur = (e) => {
+    if (e.relatedTarget == null) {
+      setSuggest(false);
+    } else {
+      if (e.relatedTarget.className === "search-result") {
+        setSuggest(true);
+      } else {
+        setSuggest(false);
+      }
+    }
+  };
+
   return (
     <div className="relative">
       <div className="flex justify-start items-center md:text-base text-sm relative">
-        <div className="flex justify-end">
+        <form
+          className="flex justify-end"
+          onSubmit={() => {
+            router
+              .push("/pokedex/pokemon/" + query)
+              .then(() => router.reload());
+          }}
+        >
           <input
             // value={query}
+            onBlur={onBlur}
+            onFocus={() => setSuggest(true)}
             type="text"
             onChange={(e) => {
               onChange(e);
@@ -48,10 +70,10 @@ function Search() {
             className="block w-5/6 md:w-full px-2 py-1 md:px-4 md:py-2 text-[#323232] bg-white border rounded-md focus:border-[#323232] focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
             placeholder="Search by ID or name"
           />
-        </div>
+        </form>
       </div>
 
-      {query.length > 0 && previews.length > 0 && (
+      {suggest && query.length > 0 && previews.length > 0 && (
         <div className="absolute bg-[#303030] border-2 left-0 w-full z-50 rounded-lg text-white">
           {previews.map((preview, id) => (
             <div
