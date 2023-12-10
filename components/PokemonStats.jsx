@@ -30,27 +30,7 @@ function PokemonStats({ pokemon, details, description }) {
           <SwiperSlide>
             <div className="mx-10 md:mx-16 lg:mx-28">
               <div className="flex items-center justify-between">
-                <div className="">
-                  {/* Tipe Pokemon */}
-                  <div className="gap-2">
-                    {pokemon.types &&
-                      pokemon.types.map((type) => (
-                        <div
-                          key={type.type.name}
-                          className="flex flex-col items-center w-[100px] md:w-[120px] lg:w-[160px] -translate-x-2.5 md:-translate-x-3 lg:-translate-x-4 -mr-6 cursor-pointer"
-                          onClick={() => router.push("types/" + type.type.name)}
-                        >
-                          <Image
-                            src={`/assets/icon_type/typeIconText_${type.type?.name}.png`}
-                            height={40}
-                            width={160}
-                            alt={type.type.name}
-                          />
-                        </div>
-                      ))}
-                  </div>
-                </div>
-                <div className="text-sm md:text-2xl lg:text-3xl pb-1">
+                <div className="text-xs md:text-base lg:text-xl py-2">
                   {details.is_mythical && (
                     <h1
                       style={{
