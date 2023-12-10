@@ -53,10 +53,10 @@ function Search() {
       <div className="flex justify-start items-center md:text-base text-sm relative">
         <form
           className="flex justify-end"
-          onSubmit={() => {
-            router
-              .push("/pokedex/pokemon/" + query)
-              .then(() => router.reload());
+          onSubmit={(e) => {
+            e.preventDefault();
+            router.push("/pokedex/pokemon/" + previews[0].name);
+            setSuggest(false);
           }}
         >
           <input
@@ -66,6 +66,7 @@ function Search() {
             type="text"
             onChange={(e) => {
               onChange(e);
+              setSuggest(true);
             }}
             className="block w-5/6 md:w-full px-2 py-1 md:px-4 md:py-2 text-[#323232] bg-white border rounded-md focus:border-[#323232] focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
             placeholder="Search by ID or name"
@@ -83,9 +84,8 @@ function Search() {
                   id == 0 && "rounded-t-lg"
                 } ${id == previews.length - 1 && "rounded-b-lg"}`}
                 onClick={() => {
-                  router
-                    .push("/pokedex/pokemon/" + preview.name)
-                    .then(() => router.reload());
+                  router.push("/pokedex/pokemon/" + preview.name);
+                  // .then(() => router.reload());
                 }}
               >
                 <div className="mr-3">

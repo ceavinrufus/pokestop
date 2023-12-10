@@ -11,7 +11,7 @@ import PokemonMainInfo from "./PokemonMainInfo";
 
 function PokemonStats({ pokemon, details, description }) {
   const router = useRouter();
-
+  console.log(pokemon);
   return (
     <>
       <div className="">
@@ -26,6 +26,7 @@ function PokemonStats({ pokemon, details, description }) {
           }}
           className="mySwiper"
         >
+          {/* Slide 1 */}
           <SwiperSlide>
             <div className="mx-10 md:mx-16 lg:mx-28">
               <div className="flex items-center justify-between">
@@ -36,7 +37,8 @@ function PokemonStats({ pokemon, details, description }) {
                       pokemon.types.map((type) => (
                         <div
                           key={type.type.name}
-                          className="flex flex-col items-center w-[100px] md:w-[120px] lg:w-[160px] -translate-x-2.5 md:-translate-x-3 lg:-translate-x-4 -mr-6"
+                          className="flex flex-col items-center w-[100px] md:w-[120px] lg:w-[160px] -translate-x-2.5 md:-translate-x-3 lg:-translate-x-4 -mr-6 cursor-pointer"
+                          onClick={() => router.push("types/" + type.type.name)}
                         >
                           <Image
                             src={`/assets/icon_type/typeIconText_${type.type?.name}.png`}
@@ -115,12 +117,14 @@ function PokemonStats({ pokemon, details, description }) {
                       width={600}
                       height={600}
                       alt={pokemon.id}
+                      priority={true}
                     />
                   </div>
                 </div>
               </div>
             </div>
           </SwiperSlide>
+          {/* Slide 2 */}
           <SwiperSlide>
             <div className="md:mx-16 lg:mx-28 items-center flex gap-6 md:flex-row flex-col-reverse">
               <div
@@ -165,6 +169,7 @@ function PokemonStats({ pokemon, details, description }) {
               </div>
             </div>
           </SwiperSlide>
+          {/* Slide 3 */}
           <SwiperSlide>
             <div className="md:mx-16 lg:mx-28 flex gap-6">
               <div className="flex flex-col w-full">

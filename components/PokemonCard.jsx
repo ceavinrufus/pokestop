@@ -11,7 +11,7 @@ const Card = ({ pokemon }) => {
   const color = pokemon.types[0].type.name;
   return (
     <div className="shadow-2xl rounded-3xl gap-4 group">
-      <div className="flex items-center rounded-3xl hover:bg-transparent hover:translate-y-1 hover:text-white border border-white transition text-[#323232] bg-white justify-between p-2 md:p-4 lg:p-8 h-[120px] w-[140px] md:h-[160px] md:w-[200px] lg:h-[250px] lg:w-[300px]">
+      <div className="flex items-center rounded-3xl hover:bg-transparent hover:animate-wiggle hover:text-white border border-white transition text-[#323232] bg-white justify-between p-2 md:p-4 lg:p-8 h-[120px] w-[140px] md:h-[160px] md:w-[200px] lg:h-[250px] lg:w-[300px]">
         <div className={`text-xs lg:text-xl md:text-sm`}>
           {/* Nomor Pokemon */}
           <p>#{("000" + pokemon.id).slice(-3)}</p>

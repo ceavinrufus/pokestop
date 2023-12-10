@@ -17,6 +17,7 @@ module.exports = {
         float: "float 3s ease-in-out infinite",
         slideInFromLeft: "slideInFromLeft 0.5s ease-out 0s 1",
         slideInFromRight: "slideInFromRight 0.5s ease-out 0s 1",
+        wiggle: "wiggle 0.2s ease-in-out",
       },
       keyframes: {
         float: {
@@ -25,6 +26,14 @@ module.exports = {
           },
           "50%": {
             transform: "translatey(0px)",
+          },
+        },
+        wiggle: {
+          "0%, 100%": {
+            transform: "rotate(-3deg)",
+          },
+          "50%": {
+            transform: "rotate(3deg)",
           },
         },
         slideInFromLeft: {
